@@ -93,5 +93,6 @@ for (j = 0; j < numbers.length; j++) {
         discardedNumbers.push(numbers[j]);
     }
 }
+// Print out the remaining numbers from discardedNumbers
 console.log(discardedNumbers);
 // --------------------------------------
