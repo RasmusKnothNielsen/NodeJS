@@ -1,5 +1,6 @@
+// --------------------------------------
 // Objects
-
+// --------------------------------------
 // Exercise 1 . Retrieve value from object by key
 
 var myObj = {"message": "Hello, earthling! I bring peace."};
