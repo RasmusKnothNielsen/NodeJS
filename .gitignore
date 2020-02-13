@@ -1,6 +1,6 @@
 
 # Ignoring the node_modules
-1/2._First_API/node_modules
+/node_modules
 
 ### Node ###
 # Logs
