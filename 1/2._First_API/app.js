@@ -30,6 +30,42 @@ app.get("/aboutThisWebsite", (req, res) => {
     });
 });
 
+// Create a new route, to practice the coding
+app.get("/goats", (req, res) => {
+    let listOfGoats = {
+        goat1 : {
+            name: "Hubert",
+            age: 4,
+            kids: "None"
+        },
+        goat2 : {
+            name: "Hannah",
+            age: 5,
+            kids: "None"
+        },
+        goat3 : {
+            name: "Henry",
+            age: 3,
+            kids: "None"
+        },
+        goat4 : {
+            name: "Halley",
+            age: 6,
+            kids: {
+                firstKid: {
+                    name: "Ashoka",
+                    age: 2
+                },
+                secondKid: {
+                    name: "Moksha",
+                    age: 1
+                }
+            }
+        }
+    }
+    res.send(listOfGoats)
+})
+
 
 // Start the webserver on port 8686
 app.listen(8686, error => {
