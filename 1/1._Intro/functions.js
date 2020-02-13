@@ -44,3 +44,22 @@ const prepareIntroduction = (introducerFunction, name) => {
 
 prepareIntroduction(introduce, "Rasmus");
 
+// Arrow function that calls a key in the me object
+const aboutMe = (me) => {
+    console.log("My hobby is", me.hobby);
+}
+
+// Create javascript objects
+let me = {
+    hobby : "Computer Science"
+}
+
+aboutMe(me);
+
+const callLater = {
+    tocall: (something) => {
+        console.log(something)
+    }
+}
+
+callLater.tocall("hi")
