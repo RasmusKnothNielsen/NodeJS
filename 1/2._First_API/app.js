@@ -5,6 +5,15 @@ const app = express();
 // The above can be onelined
 //const app = require("express")();
 
+// For POST-Support
+// Remember to install body-parser and multer
+let bodyParser = require('body-parser');
+let multer = require('multer');
+let upload = multer();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // Creating a get request for the webserver to use
 // First argument is the path
 // Second argument is a callback function that takes a request and provides a response
@@ -64,6 +73,20 @@ app.get("/goats", (req, res) => {
         }
     }
     res.send(listOfGoats)
+})
+
+// Create a route that takes pathvariables and returns a string that embeds the variables.
+app.get("/greeting", (req, res) => {
+    // req.query provides the pathvariables.
+    let greeting = "Hi there, " + req.query.name + ". Isn't it exciting to be " + req.query.age + " years old??"
+    res.send(message = {greeting})
+})
+
+// Post route that takes a json object from postman, console logs it and returns it to the sender.
+app.post("/greeting/postman", (req, res) => {
+    let greeting  = req.body
+    console.log(greeting)
+    res.send(req.body)
 })
 
 
