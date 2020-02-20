@@ -159,7 +159,6 @@ app.get("/google", (req, res) => {
 
 // Creating a route that serves a file
 app.get("/documentation", (req, res) => {
-    console.log(__dirname);
     // Concatonate the path to the specific file to the __dirname to get the correct full path
     return res.sendFile(__dirname + "/public/documentation.html");
 })
