@@ -1,6 +1,6 @@
 # Mandatory Assignment 1
-Course: NodeJS
-Date: February and March 2020
+Course: NodeJS  
+Date: February and March 2020  
 Place: Computer Science, KEA, Denmark.
 
 Create a website that contains documentation for what you have learned.
