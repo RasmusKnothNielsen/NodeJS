@@ -89,6 +89,29 @@ app.post("/greeting/postman", (req, res) => {
     res.send(req.body)
 })
 
+// Initialize arrays outside the get request, since we only want to run it once.
+// To save heap space.
+let arrayOfDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thurday", "Friday", "Saturday"]
+let arrayOfMonths = ["January", "February", "March", "April", "May", "June", "July", "August", 
+                    "September", "October", "November", "December"]
+
+// Create route that tells the time and day of the week
+// Either do it like a switch statement, or just make an array and get the day directly from that.
+app.get("/time", (req, res) => {
+    let date = new Date()
+    let todaysDate = date.getDate()
+    let month = date.getMonth()
+    let year = date.getFullYear()
+    let day = date.getDay()
+
+    // Remember to always send back JSON, when working with API
+    res.send({
+        "Date" : todaysDate + " " + arrayOfMonths[month] + " " + year + " ",
+        "Day": arrayOfDays[day],
+        "Time": date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+    })
+})
+
 
 // Start the webserver on port 8686
 app.listen(8686, error => {
