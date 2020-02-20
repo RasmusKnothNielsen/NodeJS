@@ -14,3 +14,11 @@ This means that when we type something in the app.js file, the server automatica
 
 
 NEVER USE IN PRODUCTION :)
+
+##Node-fetch
+Use this for requests in the future, since the package named requests is going to be deprecated
+
+
+## Installing packeges.
+Add the package to package.json with name and version
+After this, run the npm install command to install the missing packages
