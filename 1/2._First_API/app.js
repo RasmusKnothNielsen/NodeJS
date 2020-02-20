@@ -160,7 +160,16 @@ app.get("/google", (req, res) => {
 // Creating a route that serves a file
 app.get("/documentation", (req, res) => {
     // Concatonate the path to the specific file to the __dirname to get the correct full path
+        //return res.redirect("/documentation")
     return res.sendFile(__dirname + "/public/documentation.html");
+})
+
+
+// Playing around with redirection
+app.get("/documentationtwo", (req, res) => {
+    // Concatonate the path to the specific file to the __dirname to get the correct full path
+    //return res.redirect("/documentation")
+    return res.sendFile(__dirname + "/public/documentationtwo.html");
 })
 
 // Start the webserver on port 8686
