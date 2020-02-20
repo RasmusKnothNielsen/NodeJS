@@ -18,23 +18,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // First argument is the path
 // Second argument is a callback function that takes a request and provides a response
 app.get("/", (req, res) => {
-    res.send({message: "Hello there"});
+    return res.send({message: "Hello there"});
 });
 
 // Define something on the path /aboutMe that returns a JSON
 // First argument is the path
 // Second argument is a callback function 
 app.get("/aboutMe", (req, res) => {
-    res.send({message: "About me"});
+    return res.send({message: "About me"});
 });
 
-// Define something on the path /aboutThisWebsite that returns a JSON representation of the website
-app.get("/aboutThisWebsite", (req, res) => {
-    res.send({
+// Define something on the path /about that returns a JSON representation of the website
+app.get("/about", (req, res) => {
+    return res.send({
         about: "This website contains alot of things!",
         api: {
             aboutme: "/aboutMe contains information about me",
-            index: "/ contains the root of the site"
+            index: "/ contains the root of the site",
+            goats: "/goats contains a list of beautiful goats!",
+            greeting: "/greetings"
         }
     });
 });
@@ -72,21 +74,23 @@ app.get("/goats", (req, res) => {
             }
         }
     }
-    res.send(listOfGoats)
+    return res.send(listOfGoats)
 })
 
 // Create a route that takes pathvariables and returns a string that embeds the variables.
 app.get("/greeting", (req, res) => {
     // req.query provides the pathvariables.
     let greeting = "Hi there, " + req.query.name + ". Isn't it exciting to be " + req.query.age + " years old??"
-    res.send(message = {greeting})
+    return res.send(message = {greeting})
 })
 
 // Post route that takes a json object from postman, console logs it and returns it to the sender.
 app.post("/greeting/postman", (req, res) => {
     let greeting  = req.body
     console.log(greeting)
-    res.send(req.body)
+    return res.send({
+        "Greeting": req.body
+    })
 })
 
 // Initialize arrays outside the get request, since we only want to run it once.
@@ -105,11 +109,37 @@ app.get("/time", (req, res) => {
     let day = date.getDay()
 
     // Remember to always send back JSON, when working with API
-    res.send({
+    return res.send({
         "Date" : todaysDate + " " + arrayOfMonths[month] + " " + year + " ",
         "Day": arrayOfDays[day],
         "Time": date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
     })
+})
+
+// Create a route that takes a pathvariable id, to display the specific user
+app.get("/user/:id", (req, res) => {
+    console.log(req.params)
+    let params = req.params
+
+    return res.send({
+        id: req.params.id
+    })
+})
+
+// Query String
+// The query has to be URL/search&id="something"
+app.get("/search", (req, res) => {
+    
+    // Check if the right query string has been provided.
+    if (req.query.id) 
+    {
+        return res.send({
+            queryString: req.query.id
+        })
+    } else {
+        return res.send({response: "Invalid query string provided, please use URL/search&id='something'!"})
+
+    }
 })
 
 
