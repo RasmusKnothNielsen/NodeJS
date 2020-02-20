@@ -63,3 +63,4 @@ const callLater = {
 }
 
 callLater.tocall("hi")
+console.log(callLater)
