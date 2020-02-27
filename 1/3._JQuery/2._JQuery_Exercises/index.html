@@ -7,17 +7,38 @@
     <!-- Importing the JQuery Script-->
     <script src="./index.js"></script>
 
-	<style type="text/css">
+    <style type="text/css">
+        html {
+            height: 100%;
+            background-image: linear-gradient(red, yellow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
+            
+        }
 		.used-boxed-clicked {
 			background: linear-gradient(45deg, red, blue);
 			color: white;
 		}
-		li {
-    		list-style-position: inside;
-		}
-		ul {
-			list-style-position: inside;
-		}
+
+        #first-list, .reason {
+            display: inline-block;
+            justify-content: left;
+            color: purple;
+        }
+        .second-list {
+            float:right;
+            justify-content: right;
+            color: green;
+        }
+        .button-group {
+            position: absolute;
+            right: 0.5em;
+            bottom: 0.5em;
+            
+        }
+        
 	</style>
 </head>
 <body>
@@ -55,12 +76,10 @@
 
 	<div class="button-group">
 		<p>Action center</p>
-		<button id="submit-button">
+		<button id="submit-button" title="Click this to add a reason">
 			Click
 		</button>
 	</div>
-
-    <script src="./index.js"></script>
 
 </body>
 </html>

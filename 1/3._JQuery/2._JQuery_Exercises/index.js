@@ -1,7 +1,7 @@
 $(document).ready(() => { 
 // Styling 
 // 1. Change the body tag so that everything on the page is centered. 
-    $('body').css('text-align', 'center')
+    //$('body').css('text-align', 'center')
 
 // 2. Change the text of "Old title" to "New title". 
     $('#title h2').html("New title")
@@ -77,17 +77,14 @@ $(document).ready(() => {
 
 //  17. On mouse click add a reason to the ordered list. The reason should start from Reason 4 and count up after every click. 
 
-
     var reason = 4
     $("#submit-button").click(() => {
         let count = $('#first-list li').length;
         $("#first-list").append(`<li>Reason ${count + 1} </li>`)
+
+        //  18. Console log the parent div when the button is clicked using a direct reference to the button inside of the event handler scope. Hint: JCh0aGlzKS5wYXJlbnQoKTs= 
+        console.log($(event.currentTarget).parent())
     })
-
-
-//  18. Console log the parent div when the button is clicked using a direct reference to the button inside of the event handler scope. Hint: JCh0aGlzKS5wYXJlbnQoKTs= 
-
-    console.log($(event.currentTarget).parent())
 
 
 //  Extra challenges (No jquery needed, just edit the HTML or the CSS in the head) 
@@ -95,6 +92,7 @@ $(document).ready(() => {
 //  19. Extra challenge: Style the website until you think it looks good. 
 
 //  20. Add a tooltip to the button. You can apply it directly to the HTML and add CSS. 
+// title="Something" <- This is apparently called a tooltip. just put it inside the opening button tag
 
 //  21. Figure out how to animate the border of the box from exercise 5 like a "neon sign". You are allowed to use code snippets found online but you are required to understand what each thing does to your element. 
 
