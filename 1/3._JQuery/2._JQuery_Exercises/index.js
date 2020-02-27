@@ -101,5 +101,30 @@ $(document).ready(() => {
 // Place first-list to the left. It automatically takes a lot of width. Try to limit it. Hint VHJ5IHVzaW5nICdkaXNwbGF5OiBpbmxpbmUtYmxvY2s7Jw==
 // Place second-list to the right of the previously list. 
 // Place the button group at the lower right of the page. 
+/*
+html {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+}
+
+#first-list, .reason {
+    display: inline-block;
+    justify-content: left;
+    color: purple;
+}
+.second-list {
+    float:right;
+    justify-content: right;
+    color: green;
+}
+.button-group {
+    position: absolute;
+    right: 0.5em;
+    bottom: 0.5em;
+    
+}
+*/
 
 })
