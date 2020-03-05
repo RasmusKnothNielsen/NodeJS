@@ -1,12 +1,19 @@
 const express = require("express");
 const request = require('request');
+const multer = require("multer")
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
 let devices = [
-    { id: 1, type: "computer"},
-    { id: 2, type: "telephone"}
+    { id: 1, type: "Computer"},
+    { id: 2, type: "Telephone"}
 ];
+// SQL like way of handling the unique ID.
+let counter = 3;
 
 // Get Request on root
 app.get("/", (req, res) => {
@@ -22,22 +29,39 @@ app.get("/", (req, res) => {
 
 // Get Request on /devices
 app.get("/devices", (req, res) => {
-    res.send({devices : devices})
+    return res.send({response: devices})
 })
 
 // Get request on specific device
 app.get("/devices/:id", (req, res) => {
     const device = devices.find(device => device.id === Number(req.params.id));
     if (req.params) {
-        res.send({device: device})
+        return res.send({response: device})
     }
 })
 
-// Post request
-app.post("/test", (req, res) => {
-    console.log("test test test")
-    res.send()
+// Post request for specific device
+app.post("/devices", (req, res) => {
+    // Check if the input is correct
+    const newDevice = req.body
+    if(!newDevice.type) {
+        return res.status(400).send({response: "Missing the 'type' of the device"})
+    }
+    
+    // Use this to loop through the id of the objects.
+    //let maxID = 0;
+    //devices.map(function(obj) {
+    //    if (obj.id > maxID) maxID = obj.id
+    //})
+    let device = {id: counter, type: req.body.type}
+    counter++
+
+    devices.push(device)
+    console.log(devices)
+    return res.status(200).send()
 })
+
+
 
 // Start the webserver on port 8686
 app.listen(8686, error => {
