@@ -1,0 +1,23 @@
+{
+  "name": "keatube",
+  "version": "1.0.0",
+  "description": "A basic video site",
+  "main": "app.js",
+  "scripts": {
+    "start": "cross-env PORT=80 node app.js",
+    "start-dev": "cross-env PORT=8686 nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "video",
+    "videos",
+    "tube",
+    "kea"
+  ],
+  "author": "Rasmus Knoth Nielsen",
+  "license": "ISC",
+  "dependencies": {
+    "cross-env": "^7.0.1",
+    "express": "^4.17.1"
+  }
+}
