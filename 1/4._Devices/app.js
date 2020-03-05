@@ -9,8 +9,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 let devices = [
-    { id: 1, type: "Computer"},
-    { id: 2, type: "Telephone"}
+    { type: "Computer", id: 1},
+    { type: "Telephone", id: 2},
+    { type: "Smart Watch", id: 3}
 ];
 // SQL like way of handling the unique ID.
 let counter = 3;
@@ -43,23 +44,45 @@ app.get("/devices/:id", (req, res) => {
 // Post request for specific device
 app.post("/devices", (req, res) => {
     // Check if the input is correct
-    const newDevice = req.body
+    let newDevice = req.body
     if(!newDevice.type) {
         return res.status(400).send({response: "Missing the 'type' of the device"})
     }
     
-    // Use this to loop through the id of the objects.
-    //let maxID = 0;
-    //devices.map(function(obj) {
-    //    if (obj.id > maxID) maxID = obj.id
-    //})
-    let device = {id: counter, type: req.body.type}
     counter++
-
-    devices.push(device)
+    newDevice.id = counter
+    devices.push(newDevice)
     console.log(devices)
     return res.status(200).send()
 })
+
+// Put request for specific device
+app.put("/devices/:id", (req, res) => {
+    if (devices.filter(device => device.id === Number(req.params.id)) < 1) {
+        return res.status(400).send()
+      }
+    const index = devices.findIndex(device => device.id === Number(req.params.id));
+    delete req.body.id; // Remove the id from the request.
+    // Spread the keys and values from the request body into the updatedDevice
+    // This way, we can take new keys and add them to the device.
+    const updatedDevice = {...devices[index], ...req.body} 
+    devices[index] = updatedDevice
+    return res.status(200).send({response: devices})
+
+})
+
+// Delete request for specific device
+// Get request on specific device
+app.delete("/devices/:id", (req, res) => {
+    if (devices.filter(device => device.id === Number(req.params.id)) < 1) {
+        return res.status(400).send()
+      }
+    devices = devices.filter( device => device.id !== Number(req.params.id))
+    return res.status(200).send({response: devices})
+})
+
+
+
 
 
 
