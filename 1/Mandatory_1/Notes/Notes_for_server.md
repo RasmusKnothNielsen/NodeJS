@@ -4,24 +4,28 @@
 
 ### Arrays
 
-Define an array
+#### Define an array
+
 ```
 let friends = []
 ```
 
-Add element to array
+#### Add element to array
+
 ```
 friends.push("Rip");
 friends.push("Rap");
 friends.push("Rup");
 ```
 
-Remove last element from array
+#### Remove last element from array
+
 ```
 friends.pop();
 ```
 
-Insert elements into the array at index
+#### Insert elements into the array at index
+
 ```
 Array.splice( index, remove_count, item_list )
 friends.splice(1, 0, "Anders", "Andersine");
@@ -32,18 +36,20 @@ friends.splice(1, 0, "Anders", "Andersine");
 - items_list: The list of new items separated by comma operator that is to be inserted from the starting index.
 
 
+#### Remove specific element at index from array
 
-Remove specific element at index from array
 ```
 friends.pop(index);
 ```
 
-Find the index of element in array
+#### Find the index of element in array
+
 ```
 friends.indexof("Rap");
 ```
 
-Copy array
+#### Copy array
+
 ```
 let newFriends = friends.slice();
 ```
@@ -172,7 +178,37 @@ This means that we do not have to define functions before we use them, since Jav
 
 ## JQuery
 
+### What is JQuery
+
+jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers.
+
+### How to use JQuery
+
+Import it into your project by embedding it in the HTML Header:
+```
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+```
+Remember to always get the newest version
+<https://developers.google.com/speed/libraries>
+
+Remember to also import the local JQuery script that is going to be used, but adding it to the HTML Header:
+```
+    <!-- Importing the JQuery Script-->
+    <script src="./index.js"></script>
+```
+
+
 ### Syntaxes
+
+
+### Best practices in JQuery
+
+It is a good idea to always encapsule all JQuery in a function that executes when the page is done loading:
+```
+$(document).ready(() => { 
+    // Put JQuery code here
+}
+```
 
 ## Node.JS
 
