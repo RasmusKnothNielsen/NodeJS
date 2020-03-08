@@ -1,31 +1,28 @@
-## Javascript
+# Notes
+
+# Javascript
 
 ### Arrays
 
-
 ### Objects
-
 
 ### Strings
 
-
 ### Functions
-
 
 ## JQuery
 
 ### Syntaxes
 
-
 ## Node.JS
 
-### Installing packeges.
+### Installing packeges
+
 Add the package to package.json with name and version
 After this, run the npm install command to install the missing packages
 
-
-
 ### Nodemon
+
 Used as an alternative to:
 > $ node app
 
@@ -39,9 +36,10 @@ This means that when we type something in the app.js file, the server automatica
 NEVER USE IN PRODUCTION :)
 
 ## Node-fetch
+
 Use this for requests in the future, since the package named requests is going to be deprecated
 
-### Live reload of server:
+### Live reload of server
 
 > $ npx budo index.js --live --open
 
@@ -49,6 +47,7 @@ Using the npx budo commmand to run the index.js file with live reload flag and t
 Opens up the browser 
 
 ### how to run scripts
+
 > $ npm run [scriptname]
 
 Add it to package.json in the top as 
@@ -67,6 +66,7 @@ Add it to package.json in the top as
 
 
 ## Express server
+
 ### How to get en Express server up and running
 
 Add package.json
