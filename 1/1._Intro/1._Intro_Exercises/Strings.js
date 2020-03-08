@@ -40,3 +40,8 @@ var fact = "You are learning javascript!";
 // Capitalize the J in Javascript
 var newFact = fact.replace("j", "J");
 console.log(newFact);
+
+let number1 = 130;
+let number2 = 430;
+let stringNumber = String(number1) + String(number2) 
+console.log(stringNumber)

@@ -39,7 +39,7 @@ var diet = ["tomato", "cucumber", "rocolla", "kale"];
 
 // You are a programmer. In one line (one statement) insert hamburger, soda and pizza between the elements rocolla and kale
 diet.splice(3, 0, "hamburger", "soda", "pizza");
-//console.log(diet);
+console.log(diet);
 
 // --------------------------------------
 
