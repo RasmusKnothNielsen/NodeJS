@@ -49,8 +49,6 @@ app.get("/" (req, res) => {
 
 ### POST
 
-#### 
-
 ### PUT
 
 ### DELETE

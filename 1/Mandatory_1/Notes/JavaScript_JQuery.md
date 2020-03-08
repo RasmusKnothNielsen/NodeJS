@@ -193,6 +193,14 @@ Remember to also import the local JQuery script that is going to be used, but ad
     <script src="./index.js"></script>
 ```
 
+## Best practices in JQuery
+
+It is a good idea to always encapsule all JQuery in a function that executes when the page is done loading:
+```
+$(document).ready(() => { 
+    // Put JQuery code here
+}
+```
 
 ## Syntaxes
 
@@ -228,26 +236,108 @@ This aligns all text in the body tag to be center.
 
 > $('.temp').hide()
 
-// 5. Put a dashed border box of any pixel width around any div that has the class "reason" 
-    $('div.reason').css("border", "dashed blue 10px")
+### Target every div that has the class "reason"
 
+> $('div.reason').css("border", "dashed blue 10px")
 
-// Ordered list: Traversing the DOM 
-// 6. Change the li's inside of the ordered list to be bold. Hint: RGlyZWN0IGNoaWxkIHNlbGVjdG9ycw== 
-    $('#first-list li').css({"font-weight": "bold"})
+### Ordered Lists
 
-// 7. Change the last li to be underlined.  Hint: cHNldWRvIHNlbGVjdG9ycw== 
-    $('#first-list li').last().css({"text-decoration": "underline"})
-
-// 8. Change the second li element to have a line through it.  
-    $('#first-list li:nth-child(2)').css({"text-decoration": "line-through"})
-
-
-## Best practices in JQuery
-
-It is a good idea to always encapsule all JQuery in a function that executes when the page is done loading:
+Ordered lists are lists with numbers
 ```
-$(document).ready(() => { 
-    // Put JQuery code here
-}
+1. first entry
+2. second entry
+3. third entry
+``` 
+
+#### Change every element in a list
+
+> $('#first-list li').css({"font-weight": "bold"})
+
+#### Change the last element in a list
+
+> $('#first-list li').last().css({"text-decoration": "underline"})
+
+#### Change the second element in a list
+
+> $('#first-list li:nth-child(2)').css({"text-decoration": "line-through"})
+
+### Unordered Lists
+
+Unordered lists are lists with dots or similar
+
+- Item 1
+- Item 2
+- Item 3
+
+#### Change every element in an unordered list
+
+> $('.second-list').children().css({"font-style": "italic"})
+
+#### Change the span font size of a unordered list
+
+> $('.second-list span').css({"font-size": "0.5em"})
+
+em is better to use than px because: 
+em is not an absolut value, it is relative to the predefined value. so 0.5em is half the size
+Furthermore its size is relative to the userchosen font size.
+px is an absolute value, that is set independent of the predefined size.
+
+#### Remove a label element inside a box
+
+> $('.unused-box label:nth-child(1)').remove()
+
+#### Add a paragraph inside a box
+
+> $('.unused-box').append("<p>Second Sentence</p>")
+
+#### Add another paragraph before the already added paragraphs
+
+> $('.unused-box').prepend("<p>First Sentence</p>")
+
+#### Change a classname 
+
+> $('.unused-box').attr('class', 'used-box')
+
+#### Change class name when clicked on
+
+Every time the box is clicked it should toggle this class (add if not there or remove if there).
+Wait until the page is done loading.
+Its good practice, to always do JQuery eventhandling inside one of these:
+
+```
+    $(document).ready(() => {
+        $(".used-box").click(() => {
+            $(".used-box").toggleClass("used-boxed-clicked");
+        })
+    })
+```
+
+Remember to encapsulate it in a $(document).read() if it is not already done on the whole script
+
+#### Event handling with mouse over
+
+On mousing over the submit-button add a title property that says "You're ready to click." Remove the text when the mouse isn't over the button anymore.
+
+```
+    $("#submit-button"). mouseenter(() => {
+        $(event.currentTarget).text("You're ready to click")
+        $("#submit-button"). mouseleave(() => {
+            $(event.currentTarget).text("Submit")
+        })
+    })
+```
+
+#### Event handling on mouse click
+
+On mouse click add a reason to the ordered list. The reason should start from Reason 4 and count up after every click. 
+
+```
+    var reason = 4
+    $("#submit-button").click(() => {
+        let count = $('#first-list li').length;
+        $("#first-list").append(`<li>Reason ${count + 1} </li>`)
+
+        //  18. Console log the parent div when the button is clicked using a direct reference to the button inside of the event handler scope. Hint: JCh0aGlzKS5wYXJlbnQoKTs= 
+        console.log($(event.currentTarget).parent())
+    })
 ```
