@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express
+    </title>
+</head>
+<body>
+
+    <h1>Express Server notes</h1>
+
+    <h2>How to get en Express server up and running</h2>
+
+    <p>Add package.json</p>
+    <code>$ touch package.json</code>
+    <p><br>Install express</p>
+    <code>$ npm install express</code>
+    <p><br>Add app.js</p>
+    <code>$ touch app.js</code>
+
+    <p><br>The following is the bare minimum of setup</p>
+
+    <code>
+        const app = require("express")();<br>
+        const server = app.listen(portnumber, (error) => { <br>
+            if (error) { <br>
+                console.log("Error") <br>
+            } <br>
+            console.log("Server is running on port", server.address().port) <br>
+        }) <br>
+    </code>
+
+    <h2>HTTP Requests</h2>
+
+    <h3>GET</h3>
+
+    <h4>Return a JSON response</h4>
+
+    <code>
+        app.get("/path" (req, res) => { <br>
+            return res.send({"response", "text}); <br>
+        }) <br>
+    </code>
+
+    <h4>Return a HTML file</h4>
+
+    <code>
+        app.get("/" (req, res) => { <br>
+            return res.sendFile(__dirName + "rest/of/the/path.html"); <br>
+        }) <br>
+    </code>
+
+    <h3>POST</h3>
+
+    <h3>PUT</h3>
+
+    <h4>DELETE</h4>
+
+    <h2>Adding support for JSON body parsing</h2>
+
+    <p>Add the following lines, if you want to be able to parse post request bodies.</p>
+    <code>
+        app.use(express.json()); <br>
+        app.use(express.urlencoded({extended: true})); <br>
+    </code>
+
+    <h2>Enable NodeJS to serve files from specific folders</h2>
+    <code>
+        app.use(express.static('public')); <br>
+        app.use(express.static('videos')); <br>
+    </code>
+    
+</body>
+</html>
