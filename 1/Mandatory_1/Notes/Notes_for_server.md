@@ -200,6 +200,52 @@ Remember to also import the local JQuery script that is going to be used, but ad
 
 ### Syntaxes
 
+JQuery uses the following syntax to declare that it is being used:
+> $('')
+
+To refere to an id, pound is used
+> $('#title').css('color', 'green)
+This means that a div/tag with the id set to title is going to be affected.
+
+To refere to a class name, use the dot (.) notation
+> $('.temp').hide()
+This hides the div with the classname temp.
+
+To refere to something inside a specific div, use a space between the div and the tag
+> $('#title h2').css('text-align', 'center')
+
+#### Target a specific tag, here the body tag
+
+> $('body').css('text-align', 'center')
+
+This aligns all text in the body tag to be center.
+
+#### Target the h2 tag inside the div with the id title
+
+> $('#title h2').html("New title")
+
+#### Change background color of a box
+
+> $('.subtitle-box').css({"background-color": "blue"});
+
+#### Hide an specific element from the user without removing it from the DOM
+
+> $('.temp').hide()
+
+// 5. Put a dashed border box of any pixel width around any div that has the class "reason" 
+    $('div.reason').css("border", "dashed blue 10px")
+
+
+// Ordered list: Traversing the DOM 
+// 6. Change the li's inside of the ordered list to be bold. Hint: RGlyZWN0IGNoaWxkIHNlbGVjdG9ycw== 
+    $('#first-list li').css({"font-weight": "bold"})
+
+// 7. Change the last li to be underlined.  Hint: cHNldWRvIHNlbGVjdG9ycw== 
+    $('#first-list li').last().css({"text-decoration": "underline"})
+
+// 8. Change the second li element to have a line through it.  
+    $('#first-list li:nth-child(2)').css({"text-decoration": "line-through"})
+
 
 ### Best practices in JQuery
 
