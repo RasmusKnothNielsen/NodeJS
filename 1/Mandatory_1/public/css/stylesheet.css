@@ -31,6 +31,6 @@
   text-align: left;
 }
 
-.code {
-  background-color: lightgrey;
+.grid-container .item3 h3 {
+  padding-top: 50px;
 }

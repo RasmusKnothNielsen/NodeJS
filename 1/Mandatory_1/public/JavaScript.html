@@ -28,66 +28,201 @@
         <!-- Main view -->
         <div class="item3">
 
-            <h1>Javascript</h2>
+            <h1>Javascript</h1>
 
-            <h2>Arrays</h3>
+            <h2>Arrays</h2>
 
-            <h3>Define an array</h4>
-            <code class="code">
+            <h3>Define an array</h3>
+            <code>
+                <pre>
                 let friends = [];
+                </pre>
             </code>
 
 
-            <h3>Add elements to array</h4>
+            <h3>Add elements to array</h3>
 
-            <code class="code">
+            <code>
+                <pre>
                 friends.push("Rip"); <br>
                 friends.push("Rap"); <br>
                 friends.push("Rup"); <br>
+                </pre>
             </code>
 
-            <h3>Remove last element from array</h4>
+            <h3>Remove last element from array</h3>
 
-            <code class="code">
-                friends.pop();
+            <code>
+                <pre>
+                    friends.pop();
+                </pre>
             </code>
 
-            <h3>Insert elements into the array a index</h4>
+            <h3>Insert elements into the array a index</h3>
 
-            <code class="code">
-                Array.splice( index, remove_count, item_list ) <br>
-                friends.splice(1, 0, "Anders", "Andersine"); <br>
+            <code>
+                <pre>
+                    Array.splice( index, remove_count, item_list ) <br>
+                    friends.splice(1, 0, "Anders", "Andersine"); <br>
+                </pre>
             </code>
     
             <li>index: It is a required parameter. This parameter is the index which start modifying the array (with origin at 0).</li>
             <li>remove_count: The number of elements to be removed from the starting index.</li>
             <li>items_list: The list of new items separated by comma operator that is to be inserted from the starting index.</li>
 
-            <h4>Remove specific element at index from array</h4>
+            <h3>Remove specific element at index from array</h3>
 
-            <code class="code">
-                friends.pop(index);
+            <code>
+                <pre>
+                    friends.pop(index);
+                </pre>
             </code>
 
-            <h3>Find the index of element in array</h4>
+            <h3>Find the index of element in array</h3>
 
-            <code class="code">
-                friends.indexof("Rap");
+            <code>
+                <pre>
+                    friends.indexof("Rap");
+                </pre>
             </code>
 
-            <h3>Copy array</h4>
+            <h3>Copy array</h3>
 
-            <code class="code">
-                let newFriends = friends.slice();
+            <code>
+                <pre>
+                    let newFriends = friends.slice();
+                </pre>
             </code>
 
-            <h2>Strings</h3>
+            <h2>Strings</h2>
 
-            <h3>Declare strings</h4>
-            <code class="code">
-                let name = "Rasmus";
+            <h3>Declare strings</h3>
+            <code>
+                <pre>
+                    let name = "Rasmus";
+                </pre>
             </code>
 
+            <h3>Go from String to Integer</h3>
+            <code>
+                <pre>
+                    let firstNumber = "1.30"; <br>
+                    let secondNumber = "2.40"; <br>
+                    let newNumber = Number(firstNumber) + Number(secondNumber); <br>
+                </pre>
+            </code>
+
+            <h3>Go from Integer to String</h3>
+            <code>
+                <pre>
+                    let number1 = 130; <br>
+                    let number2 = 430; <br>
+                    let stringNumber = String(number1) + String(number2); <br>
+                </pre>
+            </code>
+
+            <h3>Go from String to Float</h3>
+            <code>
+                <pre>
+                    let float1 = "1.30"; <br>
+                    let float2 = "0.12"; <br>
+                    let result = parseFloat(float1) + parseFloat(float2): <br>
+                </pre>
+            </code>
+
+            <h3>Replacing chars in a string</h3>
+            <code>
+                <pre>
+                    var fact = "You are learning javascript!"; <br>
+                    var newFact = fact.replace("j", "J"); <br>
+                </pre>
+            </code>
+            <p>Remember that strings are immutable, therefor we need to assign the result to another variable.</p> <br>
+
+            <h2>Objects</h2>
+
+            <h3>Declare objects</h3>
+            <code>
+                <pre>
+                    let myObj = {"message": "Hello, earthling! I bring peace."};
+                </pre>
+            </code>
+
+            <h3>Add more fields to an object</h3>
+            <code>
+                <pre>
+                    myObj.answer = "How lucky for us!";
+                </pre>
+            </code>
+
+            <h3>Remove field from object</h3>
+            <code>
+                <pre>
+                    delete myObj.answer;
+                </pre>
+            </code>
+
+            <h3>Access fields from an object</h3>
+            <code>
+                <pre>
+                    var myObj = {"name": "Rasmus", "age": "33"}; <br>
+                    console.log("My name is " + myObj.name); <br>
+                    console.log("I am " + myObj.age + " years old"); <br>
+                </pre>
+            </code>
+
+            <h2>Functions</h2>
+
+            <h3>Declaring a function</h3>
+            <code>
+                <pre>
+                    function addition(num1, num2) { <br>
+                        return num1 + num2; <br>
+                    } <br>
+                </pre>
+            </code>
+
+            <h3>Pass functions as a parameter for a function</h3>
+            <code>
+                <pre>
+                    function pokeMe() { <br>
+                        console.log("Meow"); <br>
+                    } <br>
+                    <br>
+                    <br>
+                    function approachSomeone(someoneToPoke) { <br>
+                        console.log("tip tap tip tap"); <br>
+                        someoneToPoke(); <br>
+                    } <br>
+                    <br>
+                    approachSomeone(pokeMe); <br>
+                </pre>
+            </code>
+
+            <h3>Javascripts supports callback functions</h3>
+            <code>
+                <pre>
+                    // Arrow function that calls a key in the me object <br>
+                    const aboutMe = (me) => { <br>
+                    console.log("My hobby is", me.hobby); <br>
+                    } <br>
+                    <br>
+                    // Create javascript objects <br>
+                    let me = { <br>
+                    hobby : "Computer Science" <br>
+                    } <br>
+                    <br>
+                    aboutMe(me); <br>
+                </pre>
+            </code>
+
+            <h3>Why are Callback functions important</h3>
+            <p>JavaScript is an event driven language. <br> This means that instead of waiting for a response before moving on, JavaScript will keep executing while listening for other events.</p>
+
+            <h3>Hoisting</h3>
+            <p>Javascript uses hoisting, which works by taking all functions and saving it in the memoryspace, at start up. <br>
+                This means that we do not have to define functions before we use them, since Javascript is not procedural.</p>
         </div>
         
         <!-- Footer -->
