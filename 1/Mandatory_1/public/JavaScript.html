@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    <title>JavaScript</title>
+</head>
+<body>
+
+    <div class="grid-container">
+
+        <!-- Header -->
+        <div class="item1">NodeJS Course Documentation</div>
+    
+        <!-- Sidebar -->
+        <div class="item2">
+        
+            <a href="/javascript">Javascript</a> <br>
+    
+            <a href="/jquery">JQuery</a> <br>
+    
+            <a href="/nodejs">NodeJS</a> <br>
+        
+            <a href="/express">Express</a> <br>
+        </div>
+    
+        <!-- Main view -->
+        <div class="item3">
+
+            <h1>Javascript</h2>
+
+            <h2>Arrays</h3>
+
+            <h3>Define an array</h4>
+            <code class="code">
+                let friends = [];
+            </code>
+
+
+            <h3>Add elements to array</h4>
+
+            <code class="code">
+                friends.push("Rip"); <br>
+                friends.push("Rap"); <br>
+                friends.push("Rup"); <br>
+            </code>
+
+            <h3>Remove last element from array</h4>
+
+            <code class="code">
+                friends.pop();
+            </code>
+
+            <h3>Insert elements into the array a index</h4>
+
+            <code class="code">
+                Array.splice( index, remove_count, item_list ) <br>
+                friends.splice(1, 0, "Anders", "Andersine"); <br>
+            </code>
+    
+            <li>index: It is a required parameter. This parameter is the index which start modifying the array (with origin at 0).</li>
+            <li>remove_count: The number of elements to be removed from the starting index.</li>
+            <li>items_list: The list of new items separated by comma operator that is to be inserted from the starting index.</li>
+
+            <h4>Remove specific element at index from array</h4>
+
+            <code class="code">
+                friends.pop(index);
+            </code>
+
+            <h3>Find the index of element in array</h4>
+
+            <code class="code">
+                friends.indexof("Rap");
+            </code>
+
+            <h3>Copy array</h4>
+
+            <code class="code">
+                let newFriends = friends.slice();
+            </code>
+
+            <h2>Strings</h3>
+
+            <h3>Declare strings</h4>
+            <code class="code">
+                let name = "Rasmus";
+            </code>
+
+        </div>
+        
+        <!-- Footer -->
+      <div class="item4">Made in accordance to Mandatory 1 in Fullstack NodeJS course at Computer Science, KEA, 2020</div>
+    
+    </div>
+
+
+</body>
+</html>

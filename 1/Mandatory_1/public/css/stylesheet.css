@@ -1,0 +1,36 @@
+.item1 { grid-area: header; }
+.item2 { grid-area: menu; }
+.item3 { grid-area: main; }
+.item4 { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main main main'
+    'menu footer footer footer footer footer';
+  grid-gap: 5px;
+  background-color: #481380;
+  padding: 5px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 20px;
+}
+
+.grid-container .item1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.grid-container .item3 {
+  padding-left: 10px;
+  text-align: left;
+}
+
+.code {
+  background-color: lightgrey;
+}

@@ -4,6 +4,9 @@ const portNumber = 8686
 
 const app = express();
 
+// Allow server to serve public folder
+app.use(express.static("public"));
+
 // GET HTTP Request for root
 app.get("/", (req, res) => {
     return res.sendFile(__dirname + "/public/index.html");
@@ -14,9 +17,14 @@ app.get("/nodejs", (req, res) => {
     return res.sendFile(__dirname + "/public/NodeJS.html");
 })
 
-// Get Request for JavaScript and JQuery
-app.get("/javascriptandjquery", (req, res) => {
-    return res.sendFile(__dirname + "/public/Javascript_JQuery.html");
+// Get Request for JavaScript
+app.get("/javascript", (req, res) => {
+    return res.sendFile(__dirname + "/public/Javascript.html");
+})
+
+// Get Request for JQuery
+app.get("/jquery", (req, res) => {
+    return res.sendFile(__dirname + "/public/JQuery.html");
 })
 
 // Get Request for Express
