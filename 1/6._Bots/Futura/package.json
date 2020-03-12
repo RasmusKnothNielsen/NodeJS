@@ -1,0 +1,21 @@
+{
+  "name": "futura",
+  "version": "1.0.0",
+  "description": "Futura the talking bot",
+  "main": "Eliza-bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Futura",
+    "Bot",
+    "Talk",
+    "AI",
+    "Fun"
+  ],
+  "author": "Rasmus Knoth Nielsen",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.0.2"
+  }
+}

@@ -1,7 +1,9 @@
 // require the discord.js module
 const Discord = require('discord.js');
-// Importing config file to access token
-const config = require('./config.json');
+// require google to support google search
+const google = require('google');
+// Importing prefix and token
+const { prefix, token } = require('./config.json');
 // create a new Discord client
 const client = new Discord.Client();
 
@@ -13,14 +15,31 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 	// Testing
-	if (msg.content === 'ping') {
+	if (msg.content === `${prefix}ping`) {
 		msg.reply('pong');
 	}
-
-	console.log(msg.content);
+	else if (msg.content.startsWith(`${prefix}beep`)) {
+		msg.channel.send('Boop!');
+	}
+	else if (msg.content === `${prefix}server`) {
+		msg.channel.send(`Server name: ${msg.guild.name}\nTotal members: ${msg.guild.memberCount}\nGenesis: ${msg.guild.createdAt}\nLocation: ${msg.guild.region}`);
+	}
+	else if (msg.content === `${prefix}user-info`) {
+		msg.channel.send(`Your username: ${msg.author.username}\nYour ID: ${msg.author.id}`);
+	}
+	else if (msg.content.startsWith(`${prefix}g `)) {
+		const lookup = msg.content.slice(3);
+		const newlookup = 'https://www.google.com/search?source=hp&ei=mFopW5aMIomSsAfRw77IDg&q=' + lookup;
+		msg.channel.send('<a:googling:426453223310622740> Loading...').then(message => {
+			google(lookup, (err) => {
+			  if (err) {console.error(err);}
+			  else {
+					message.edit(newlookup);
+			  }
+			});
+		  });
+	}
 });
 
 // login to Discord with your app's token
-// Removed token from app, provide it at startup
-// TOKEN='Insert-Token-Here' node Discord-bot.js
-client.login(process.env.TOKEN);
+client.login(token);
