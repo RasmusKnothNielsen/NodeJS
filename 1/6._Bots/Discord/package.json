@@ -1,0 +1,22 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "Bot that can converse over Discord and provide songs every friday",
+  "main": "Discord-bot.js",
+  "scripts": {
+    "start": "node Discord-bot.js $TOKEN",
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "keywords": [
+    "Discord",
+    "Bot",
+    "Converse",
+    "Friday",
+    "NodeJS"
+  ],
+  "author": "Rasmus Knoth Nielsen",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.0.2"
+  }
+}
