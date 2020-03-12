@@ -1,4 +1,4 @@
-const elizabot = require('./Eliza-bot.js');
+const futura = require('./Eliza-bot.js');
 // require the discord.js module
 const Discord = require('discord.js');
 // Importing constfix and token
@@ -13,13 +13,13 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 	if (msg.content === 'Hi Futura') {
-		msg.reply(elizabot.start());
+		msg.reply(futura.start());
 	}
 	else if (msg.content === 'Bye Futura') {
-		msg.reply(elizabot.bye());
+		msg.reply(futura.bye());
 	}
 	else if (msg.content && !msg.author.bot) {
-		msg.reply(elizabot.reply(msg.content));
+		msg.reply(futura.reply(msg.content));
 	}
 });
 
