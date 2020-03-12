@@ -9,20 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/stylesheet.css">
-
-    <script>
-        function ls() {
-            let files = []
-            fs.readdir(__dirname + '/public/', function(err, items) {
-                console.log(items);
-
-                for (let i = 0; i < items.length; i++) {
-                    files.append(items[i])
-                    document.getElementById('placeholder-' + i+1).innerHTML = items[i];
-                }
-            });
-        }
-    </script>
 </head>
 <body>
 
@@ -47,16 +33,48 @@
         </ul>
       </nav>
 
-    <div class="container p-3 my-3 border" style="position:relative; top:5em;">
+      <div class="container p-3 my-3 border" style="position:relative; top:5em;">
         <h1>Tools</h1>
 
         <h3>NPM</h3>
 
+        <p>npm is used to install packages from a large software registry.</p>
+
+        <code>
+            <pre>
+                $ npm install [package]
+                $ npm i [package]
+                $ npm install -g [package]
+            </pre>
+        </code>
+        <p>the -g flag means that the package is installed globally, thus it can be accessed from all projects.</p>
+
+        <h3>Nodemon</h3>
+
+        <p>Enables automatic restart of server, when changes in the directory is deteched</p>
+
+        <code>
+            <pre>
+                $ nodemon app.js
+            </pre>
+        </code>
+
         <h3>NPX</h3>
+
+        <p>npx is used to run a package from npm.</p>
+
+        <code>
+            <pre>
+                $ npx budo index.js --live --open
+            </pre>
+        </code>
+
+        <p>This runs the budo package from npm, with two flags. Check Budo for more information.</p>
 
         <h4>Budo</h4>
 
-        <p>Enables live reloading of server when changes occur.</p>
+        <p>Enables live reloading of server when changes occur. Does what nodemon does, <br>
+            but with the added benefit of auto refreshing the browser.</p>
 
         <code>
             <pre>
@@ -66,9 +84,6 @@
 
         <p>Using the npx budo commmand to run the index.js file with live reload flag and the open flag.
             Opens up the browser </p>
-
-        <h3>Nodemon</h3>
-
 
         <h3>Manipulation of filesystem</h3>
 
@@ -84,12 +99,6 @@
                 });
             </pre>
         </code>
-
-        <div>
-            <p>In here i want <span id="placeholder-1"></span></p>
-            <p>In here i want <span id="placeholder-2"></span></p>
-        </div>
-        
  </div>
 </body>
 </html>
