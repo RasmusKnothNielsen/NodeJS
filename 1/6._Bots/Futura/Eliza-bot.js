@@ -684,7 +684,7 @@ ElizaBot.prototype._init = function() {
 	const synPatterns = {};
 
 	if ((this.elizaSynons) && (typeof this.elizaSynons == 'object')) {
-		for (var i in this.elizaSynons) synPatterns[i] = '(' + i + '|' + this.elizaSynons[i].join('|') + ')';
+		for (const i in this.elizaSynons) synPatterns[i] = '(' + i + '|' + this.elizaSynons[i].join('|') + ')';
 	}
 	// check for keywords or install empty structure to prevent any errors
 	if ((!this.elizaKeywords) || (typeof this.elizaKeywords.length == 'undefined')) {
@@ -700,8 +700,9 @@ ElizaBot.prototype._init = function() {
 	const wsre = /\s+/g;
 	for (let k = 0; k < this.elizaKeywords.length; k++) {
 		const rules = this.elizaKeywords[k][2];
-		this.elizaKeywords[k][3] = k; // save original index for sorting
-		for (var i = 0; i < rules.length; i++) {
+		// save original index for sorting
+		this.elizaKeywords[k][3] = k;
+		for (let i = 0; i < rules.length; i++) {
 			const r = rules[i];
 			// check mem flag and store it as decomp's element 2
 			if (r[0].charAt(0) == '$') {
@@ -727,7 +728,7 @@ ElizaBot.prototype._init = function() {
 			else {
 				m = are.exec(r[0]);
 				if (m) {
-					var lp = '';
+					let lp = '';
 					let rp = r[0];
 					while (m) {
 						lp += rp.substring(0, m.index + 1);
@@ -742,13 +743,13 @@ ElizaBot.prototype._init = function() {
 				}
 				m = are1.exec(r[0]);
 				if (m) {
-					var lp = '\\s*(.*)\\s*';
+					let lp = '\\s*(.*)\\s*';
 					if ((m[1] != ')') && (m[1] != '\\')) lp += '\\b';
 					r[0] = lp + r[0].substring(m.index - 1 + m[0].length);
 				}
 				m = are2.exec(r[0]);
 				if (m) {
-					var lp = r[0].substring(0, m.index + 1);
+					let lp = r[0].substring(0, m.index + 1);
 					if (m[1] != '(') lp += '\\b';
 					r[0] = lp + '\\s*(.*)\\s*';
 				}
@@ -765,8 +766,8 @@ ElizaBot.prototype._init = function() {
 	ElizaBot.prototype.posts = {};
 
 	if ((this.elizaPres) && (this.elizaPres.length)) {
-		var a = new Array();
-		for (var i = 0; i < this.elizaPres.length; i += 2) {
+		const a = new Array();
+		for (let i = 0; i < this.elizaPres.length; i += 2) {
 			a.push(this.elizaPres[i]);
 			ElizaBot.prototype.pres[this.elizaPres[i]] = this.elizaPres[i + 1];
 		}
@@ -779,8 +780,8 @@ ElizaBot.prototype._init = function() {
 	}
 
 	if ((this.elizaPosts) && (this.elizaPosts.length)) {
-		var a = new Array();
-		for (var i = 0; i < this.elizaPosts.length; i += 2) {
+let a = new Array();
+		forletar i = 0; i < this.elizaPosts.length; i += 2) {
 			a.push(this.elizaPosts[i]);
 			ElizaBot.prototype.posts[this.elizaPosts[i]] = this.elizaPosts[i + 1];
 		}
@@ -887,12 +888,12 @@ ElizaBot.prototype._execRule = function(k) {
 			}
 			let rpl = reasmbs[ri];
 			if (this.debug) {
-alert('match:\nkey: ' + this.elizaKeywords[k][0] +
+				alert('match:\nkey: ' + this.elizaKeywords[k][0] +
 				'\nrank: ' + this.elizaKeywords[k][1] +
 				'\ndecomp: ' + decomps[i][0] +
 				'\nreasmb: ' + rpl +
 				'\nmemflag: ' + memflag);
-}
+			}
 			if (rpl.search('^goto ', 'i') == 0) {
 				ki = this._getRuleIndexByKey(rpl.substring(5));
 				if (ki >= 0) return this._execRule(ki);
