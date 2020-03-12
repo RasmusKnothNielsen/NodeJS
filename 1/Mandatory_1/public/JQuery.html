@@ -1,39 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <title>JQuery</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/stylesheet.css">
 </head>
 <body>
+    
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <a class="navbar-brand" href="/">Home</a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/JavaScript">Javascript</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/JQuery">JQuery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/NodeJS">NodeJS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Express">Express</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Tools">Tools</a>
+          </li>
+        </ul>
+      </nav>
 
-    <div class="grid-container">
+    <div class="container p-3 my-3 border" style="position:relative; top:5em;">
+      <h1>JQuery</h1>
 
-        <!-- Header -->
-        <div class="item1">NodeJS Course Documentation</div>
-    
-        <!-- Sidebar -->
-        <div class="item2">
-        
-            <a href="/javascript">Javascript</a> <br>
-    
-            <a href="/jquery">JQuery</a> <br>
-    
-            <a href="/nodejs">NodeJS</a> <br>
-        
-            <a href="/express">Express</a> <br>
-        </div>
-    
-        <!-- Main view -->
-        <div class="item3">
-            <h1>JQuery</h1>
-        </div> 
+            <h2>What is JQuery?</h2>
+            <p>jQuery is a fast, small, and feature-rich JavaScript library. <br> 
+                It makes things like HTML document traversal and manipulation, event handling, animation, <br> 
+                and Ajax much simpler with an easy-to-use API that works across a multitude of browsers.</p>
 
-        <!-- Footer -->
-        <div class="item4">Made in accordance to Mandatory 1 in Fullstack NodeJS course at Computer Science, KEA, 2020</div>
-    
-    </div>
+            <h2>How to use JQuery</h2>
 
+            <p>Import it into your project by embedding it in the HTML Header:</p>
+            <code>
+                <pre>
+                    &ltscript src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"&gt&lt/script&gt
+                </pre>
+            </code>
+            <p>Remember to always get the newest version</p>
+            <a href="https://developers.google.com/speed/libraries">Here</a>
+
+            <p>Remember to also import the local JQuery script that is going to be used, but adding it to the HTML Header:</p>
+            <code>
+                <pre>
+                    <!-- Importing the JQuery Script-->
+                    &ltscript src="./index.js"&gt&lt/script&gt
+                </pre>
+            </code>
+
+            <h2>Best practices in JQuery</h2>
+            <p>It is a good idea to always encapsule all JQuery in a function that executes when the page is done loading:</p>
+            <code>
+                <pre>
+                    $(document).ready(() => { 
+                        // Put JQuery code here
+                    }
+                </pre>
+            </code>
+
+            <h2>Syntaxes</h2>
+            <p>JQuery uses the following syntax to declare that it is being used:</p>
+            <code>
+                <pre>
+                    $('')
+                </pre>
+            </code>
+
+            <p>To refere to an id, pound is used</p>
+            <code>
+                <pre>
+                    $('#title').css('color', 'green)
+                </pre>
+            </code>
+            <p>This means that a div/tag with the id set to title is going to be affected.</p>
+
+            <p>To refere to a class name, use the dot (.) notation</p>
+            <code>
+                <pre>
+                    $('.temp').hide()
+                </pre>
+            </code>
+
+            <p>To refere to something inside a specific div, use a space between the div and the tag</p>
+            <code>
+                <pre>
+                    $('#title h2').css('text-align', 'center')
+                </pre>
+            </code>
+
+            <h3>Target a specific tag, here the body tag</h3>
+            <code>
+                <pre>
+                    $('body').css('text-align', 'center')
+                </pre>
+            </code>
+            <p>This aligns all text in the body tag to be center.</p>
+            
+            <h3>Target the h2 tag inside the div with the id title</h3>
+            <code>
+                <pre>
+                    $('#title h2').html("New title")
+                </pre>
+            </code>
+
+            <h3>Change background color of a box</h3>
+            <code>
+                <pre>
+                    $('.subtitle-box').css({"background-color": "blue"});
+                </pre>
+            </code>
+
+            <h3>Hide an specific element from the user without removing it from the DOM</h3>
+            <code>
+                <pre>
+                    $('.temp').hide()
+                </pre>
+            </code>
+
+            <h3>Target every div that has the class "reason"</h3>
+            <code>
+                <pre>
+                    $('div.reason').css("border", "dashed blue 10px")
+                </pre>
+            </code>
+
+            <h3>Ordered lists</h3>
+
+            <p>Ordered lists are lists with numbers</p>
+            <code>
+                <pre>
+                    1. first entry
+                    2. second entry
+                    3. third entry
+                </pre>
+            </code>
+
+            <h4>Change every element in a list</h4>
+            <code>
+                <pre>
+                    $('#first-list li').css({"font-weight": "bold"})
+                </pre>
+            </code>
+
+            <h4>Change the last element in a list</h4>
+            <code>
+                <pre>
+                    $('#first-list li').last().css({"text-decoration": "underline"})
+                </pre>
+            </code>
+
+            <h4>Change the second element in a list</h4>
+            <code>
+                <pre>
+                    $('#first-list li:nth-child(2)').css({"text-decoration": "line-through"})
+                </pre>
+            </code>
+
+            <h3>Unordered Lists</h3>
+            <p>Unordered lists are lists with dots or similar</p>
+            <code>
+                <pre>
+                    - Item 1
+                    - Item 2
+                    - Item 3
+                </pre>
+            </code>
+
+            <h4>Change every element in an unordered list</h4>
+            <code>
+                <pre>
+                    $('.second-list').children().css({"font-style": "italic"})
+                </pre>
+            </code>
+
+            <h4>Change the span font size of a unordered list</h4>
+            <code>
+                <pre>
+                    $('.second-list span').css({"font-size": "0.5em"})
+                </pre>
+            </code>
+            <p>em is better to use than px because: <br>
+                em is not an absolut value, it is relative to the predefined value. so 0.5em is half the size <br>
+                Furthermore its size is relative to the userchosen font size. <br>
+                px is an absolute value, that is set independent of the predefined size.</p>
+
+            <h4>Remove a label element inside a box</h4>
+            <code>
+                <pre>
+                    $('.unused-box label:nth-child(1)').remove()
+                </pre>
+            </code>
+
+            <h4>Add a paragraph inside a box</h4>
+            <code>
+                <pre>
+                    $('.unused-box').append("&ltp&gtSecond Sentence&lt/p&gt")
+                </pre>
+            </code>
+
+            <h4>Add another paragraph before the already added paragraphs</h4>
+            <code>
+                <pre>
+                    $('.unused-box').prepend("&ltp&gtFirst Sentence&lt/p&gt")
+                </pre>
+            </code>
+
+            <h4>Change a classname</h4>
+            <code>
+                <pre>
+                    $('.unused-box').attr('class', 'used-box')
+                </pre>
+            </code>
+
+            <h4>Change class name when clicked on</h4>
+            <p>Every time the box is clicked it should toggle this class (add if not there or remove if there). <br>
+                Wait until the page is done loading. <br>
+                Its good practice, to always do JQuery eventhandling inside one of these:</p>
+            <code>
+                <pre>
+                    $(document).ready(() => {
+                        $(".used-box").click(() => {
+                            $(".used-box").toggleClass("used-boxed-clicked");
+                        })
+                    })
+                </pre>
+            </code>
+
+            <p>Remember to encapsulate it in a $(document).read() if it is not already done on the whole script</p>
+
+            <h4>Event handling with mouse over</h4>
+            <p>On mousing over the submit-button add a title property that says "You're ready to click." <br> Remove the text when the mouse isn't over the button anymore.</p>
+            <code>
+                <pre>
+                    $("#submit-button"). mouseenter(() => {
+                        $(event.currentTarget).text("You're ready to click")
+                        $("#submit-button"). mouseleave(() => {
+                            $(event.currentTarget).text("Submit")
+                        })
+                    })
+                </pre>
+            </code>
+
+            <h4>Event handling on mouse click</h4>
+            <p>On mouse click add a reason to the ordered list. The reason should start from Reason 4 and count up after every click.</p>
+            <code>
+                <pre>
+                    var reason = 4
+                    $("#submit-button").click(() => {
+                        let count = $('#first-list li').length;
+                        $("#first-list").append(`&ltli&gtReason ${count + 1} &lt/li&gt`)
+                
+                        //  18. Console log the parent div when the button is clicked 
+                        // using a direct reference to the button inside of the event handler scope. 
+                        console.log($(event.currentTarget).parent())
+                    })
+                </pre>
+            </code>
+ </div>
 </body>
 </html>

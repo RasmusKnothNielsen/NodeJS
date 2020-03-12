@@ -1,38 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <title>NodeJS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/stylesheet.css">
 </head>
 <body>
     
-    <div class="grid-container">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <a class="navbar-brand" href="/">Home</a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/JavaScript">Javascript</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/JQuery">JQuery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/NodeJS">NodeJS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Express">Express</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Tools">Tools</a>
+          </li>
+        </ul>
+      </nav>
 
-        <!-- Header -->
-        <div class="item1">NodeJS Course Documentation</div>
-    
-      <!-- Sidebar -->
-      <div class="item2">
-        
-        <a href="/javascript">Javascript</a> <br>
-    
-        <a href="/jquery">JQuery</a> <br>
-    
-        <a href="/nodejs">NodeJS</a> <br>
-        
-        <a href="/express">Express</a> <br>
-      </div>
-    
-      <!-- Main view -->
-      <div class="item3">
-          <h1>NodeJS</h1>
-      </div>  
-      
-      <!-- Footer -->
-      <div class="item4">Made in accordance to Mandatory 1 in Fullstack NodeJS course at Computer Science, KEA, 2020</div>
-    </div>
+    <div class="container p-3 my-3 border" style="position:relative; top:5em;">
+        <h1>NodeJS</h1>
 
+        <h2>Installing packeges</h2>
+        <p>Add the package to package.json with name and version <br>
+            After this, run the npm install command to install the missing packages</p>
+
+        <h2>Initialising a new npm project</h2>
+        <p>Use this command, to initialie new npm project. Useful when you want to upload a library to npm</p>
+        <code>
+            <pre>
+                $ npm init
+            </pre>
+        </code>
+
+        <h2>Nodemon</h2>
+        <p>Used as an alternative to:</p>
+        <code>
+            <pre>
+                $ node app
+            </pre>
+        </code>
+        <p>Use this instead</p>
+        <code>
+            <pre>
+                $ nodemon app
+            </pre>
+        </code>
+
+        <p>This runs the server in another way, so that we can restart the server without having to shut it down. <br>
+            Other than this, it rebuilds the server from scratch everytime there is a change. <br>
+            This means that when we type something in the app.js file, the server automatically restarts and implement the change.</p>
+        
+        <p>NEVER USE IN PRODUCTION :)</p>
+
+        <h2>Node-fetch</h2>
+        <p>Use this for requests in the future, since the package named requests is going to be deprecated</p>
+
+        <h2>Live reload of server</h2>
+
+        <code>
+            <pre>
+                $ npx budo index.js --live --open
+            </pre>
+        </code>
+        <p>Using the npx budo commmand to run the index.js file with live reload flag and the open flag. <br>
+            Opens up the browser.</p>
+        
+        <h2>How to run scripts</h2>
+        <code>
+            <pre>
+                $ npm run [scriptname]
+            </pre>
+        </code>
+
+        <p>Add it to package.json in the top as </p>
+        <code>
+            <pre>
+                {
+                    "scripts": {
+                        "start": "node app.js",
+                        "start-dev": "nodemon app.js"
+                    },
+                    dependencies: {
+                        "express": "^4.17.1"
+                    }
+                }
+            </pre>
+        </code>
+        <p>"start" script starts the app, <br>
+            "start-dev" runs the app in developer mode (DO NOT USE IN PRODUCTION) <br>
+            <br>
+            Another example is</p>
+        <code>
+            <pre>
+                "scripts": {
+                    "start": "cross-env PORT=80 node app.js",
+                    "start-dev": "cross-env PORT=8686 nodemon app.js",
+                    "test": "echo \"Error: no test specified\" && exit 1"
+                  },
+            </pre>
+        </code>
+
+        <p>Which uses platform independent environment variables to enable cross platform execution.</p>
+
+
+        <h2>Using Environment variables to set port and other things</h2>
+
+        <p>If you set the port number in our express server to the following</p>
+        <code>
+            <pre>
+                process.env.PORT || 3000
+            </pre>
+        </code>
+
+        <p>It is possible to run the application by writing</p>
+        <code>
+            <pre>
+                $ node app.js
+            </pre>
+        </code>
+        <p>And it will start to listen on port 3000</p>
+
+        <p>If you want it to listen to another port you can do the following</p>
+        <code>
+            <pre>
+                $ PORT=8080 node app.js
+            </pre>
+        </code>
+        <p>And now it will listen to port 8080.</p>
+
+        <h2>Make scripts that use platform independent environment variables</h2>
+
+        <p>Install cross-env</p>
+        <code>
+            <pre>
+                $ npm install --save-dev cross-env
+            </pre>
+        </code>
+
+        <p>now you can define what port to run on by typing the following</p>
+
+        <code>
+            <pre>
+                $ cross-env PORT=80 node app.js
+            </pre>
+        </code>
+
+        <p>And it works on Windows/Unix/OSX</p>
+ </div>
 </body>
 </html>

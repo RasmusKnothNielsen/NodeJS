@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
-    <title>JavaScript</title>
+    <title>Javascript</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/stylesheet.css">
 </head>
 <body>
+    
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <a class="navbar-brand" href="/">Home</a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/JavaScript">Javascript</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/JQuery">JQuery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/NodeJS">NodeJS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Express">Express</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Tools">Tools</a>
+          </li>
+        </ul>
+      </nav>
 
-    <div class="grid-container">
-
-        <!-- Header -->
-        <div class="item1">NodeJS Course Documentation</div>
-    
-        <!-- Sidebar -->
-        <div class="item2">
-        
-            <a href="/javascript">Javascript</a> <br>
-    
-            <a href="/jquery">JQuery</a> <br>
-    
-            <a href="/nodejs">NodeJS</a> <br>
-        
-            <a href="/express">Express</a> <br>
-        </div>
-    
-        <!-- Main view -->
-        <div class="item3">
-
-            <h1>Javascript</h1>
+    <div class="container p-3 my-3 border" style="position:relative; top:5em;">
+        <h1>Javascript</h1>
 
             <h2>Arrays</h2>
 
@@ -223,13 +229,6 @@
             <h3>Hoisting</h3>
             <p>Javascript uses hoisting, which works by taking all functions and saving it in the memoryspace, at start up. <br>
                 This means that we do not have to define functions before we use them, since Javascript is not procedural.</p>
-        </div>
-        
-        <!-- Footer -->
-      <div class="item4">Made in accordance to Mandatory 1 in Fullstack NodeJS course at Computer Science, KEA, 2020</div>
-    
-    </div>
-
-
+ </div>
 </body>
 </html>

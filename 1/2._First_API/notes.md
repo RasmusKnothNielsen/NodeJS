@@ -17,6 +17,6 @@ NEVER USE IN PRODUCTION :)
 Use this for requests in the future, since the package named requests is going to be deprecated
 
 
-## Installing packeges.
+## Installing packages.
 Add the package to package.json with name and version
 After this, run the npm install command to install the missing packages
