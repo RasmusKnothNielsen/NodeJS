@@ -30,6 +30,9 @@
           <li class="nav-item">
             <a class="nav-link" href="/Tools">Tools</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/API_docs">API</a>
+          </li>
         </ul>
       </nav>
 
@@ -77,6 +80,27 @@
 
     <h3>GET</h3>
 
+    <h4>When to use GET Requests</h4>
+    <p>When the info we send over the internet is not sensitive. Example: Search Query</p>
+
+    <ul>
+        <li>
+            Appends form-data into the URL in name/value pairs
+        </li>
+        <li>            
+            The length of a URL is limited (2048 characters)
+        </li>
+        <li>
+            Never use GET to send sensitive data! (will be visible in the URL)
+        </li>
+        <li>
+            Useful for form submissions where a user wants to bookmark the result
+        </li>
+        <li>
+            GET is better for non-secure data, like query strings in Google
+        </li>
+    </ul>
+
     <h4>Return a JSON response</h4>
 
     <code>
@@ -110,6 +134,20 @@
 
     <h3>POST</h3>
 
+    <h4>When to use POST Requests</h4>
+    
+    <p>Always use POST if the form data contains sensitive or personal information. <br> 
+        The POST method does not display the form data in the page address field.</p>
+
+    <ul>
+        <li>
+            POST has no size limitations, and can be used to send large amounts of data.
+        </li>
+        <li>
+            Form submissions with POST cannot be bookmarked
+        </li>
+    </ul>
+
     <code>
         <pre>
             app.post("/devices", (req, res) => {
@@ -130,6 +168,26 @@
 
     <p>Be aware that you need to enable JSON parsing, for this post request to work. </p>
     <p>Look at "Adding support for JSON body parsing" for more information</p>
+
+    <h4>Supporting POST Request forms</h4>
+
+    <p>If you want to be able to validate and sanitize the information provided in a Post Request form, <br> 
+        you have to import express validator</p>
+    <code>
+        <pre>
+            $ npm install express-validator
+        </pre>
+    </code>
+
+    <p>After this, you have to require the following two packages</p>
+    <code>
+        <pre>
+            const { body,validationResult } = require('express-validator/check');
+            const { sanitizeBody } = require('express-validator/filter');
+        </pre>
+    </code>
+
+
 
     <h3>PUT</h3>
 

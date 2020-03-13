@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>API Center</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <a class="navbar-brand" href="/">Home</a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/JavaScript">Javascript</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/JQuery">JQuery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/NodeJS">NodeJS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Express">Express</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Tools">Tools</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/API_docs">API</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="container p-3 my-3 border" style="position:relative; top:5em;">
+        
+        <h2>API documentation</h2>
+
+        <p>I've implemented an API to demonstrate how GET, POST, PUT and DELETE works from Postman, cURL or similar</p>
+
+        <h3>General information</h3>
+
+        <p>Send a GET Request to the following address, to get an updated list of pages and functions</p>
+        <code>
+          <pre>
+            localhost:8686/api
+          </pre>
+        </code>
+
+        <img src="Rest_API_Methods_Table.png" alt="Rest API Methods Table" style="width: 100%;">
+
+        <h3>GET Request</h3>
+
+        <p>Located at</p>
+        <code>
+          <pre>
+            localhost:8686/api/writers
+          </pre>
+        </code>
+
+        <h3>POST Request</h3>
+
+        <p>Located at</p>
+        <code>
+          <pre>
+            localhost:8686/api/writers
+          </pre>
+        </code>
+
+        <p>JSON format</p>
+        <code>
+          <pre>
+            {
+              "fname": "Albert",
+              "lname": "camus"
+            }
+          </pre>
+        </code>
+
+        <h3>PUT Request</h3>
+        
+        <p>Located at</p>
+        <code>
+          <pre>
+            localhost:8686/api/writers/[id]
+          </pre>
+        </code>
+
+        <p>JSON format</p>
+        <code>
+          <pre>
+            {
+              "fname": "Albert",
+              "lname": "Camus"
+            }
+          </pre>
+        </code>
+
+        <h3>DELETE Request</h3>
+
+        <p>Located at</p>
+        <code>
+          <pre>
+            localhost:8686/api/writers/[id]
+          </pre>
+        </code>
+
+    </div>
+    </body>
+</html>
