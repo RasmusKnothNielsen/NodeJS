@@ -54,6 +54,7 @@
             <h3>Define an array</h3>
             <code>
                 <pre>
+
                 let friends = [];
                 </pre>
             </code>
@@ -63,9 +64,10 @@
 
             <code>
                 <pre>
-                friends.push("Rip"); <br>
-                friends.push("Rap"); <br>
-                friends.push("Rup"); <br>
+
+                friends.push("Rip"); 
+                friends.push("Rap"); 
+                friends.push("Rup"); 
                 </pre>
             </code>
 
@@ -73,6 +75,7 @@
 
             <code>
                 <pre>
+
                     friends.pop();
                 </pre>
             </code>
@@ -81,7 +84,8 @@
 
             <code>
                 <pre>
-                    Array.splice( index, remove_count, item_list ) <br>
+
+                    Array.splice( index, remove_count, item_list ) 
                     friends.splice(1, 0, "Anders", "Andersine"); <br>
                 </pre>
             </code>
@@ -94,6 +98,7 @@
 
             <code>
                 <pre>
+
                     friends.pop(index);
                 </pre>
             </code>
@@ -102,6 +107,7 @@
 
             <code>
                 <pre>
+
                     friends.indexof("Rap");
                 </pre>
             </code>
@@ -110,6 +116,7 @@
 
             <code>
                 <pre>
+
                     let newFriends = friends.slice();
                 </pre>
             </code>
@@ -119,6 +126,7 @@
             <h3>Declare strings</h3>
             <code>
                 <pre>
+
                     let name = "Rasmus";
                 </pre>
             </code>
@@ -126,35 +134,39 @@
             <h3>Go from String to Integer</h3>
             <code>
                 <pre>
-                    let firstNumber = "1.30"; <br>
-                    let secondNumber = "2.40"; <br>
-                    let newNumber = Number(firstNumber) + Number(secondNumber); <br>
+
+                    let firstNumber = "1.30"; 
+                    let secondNumber = "2.40"; 
+                    let newNumber = Number(firstNumber) + Number(secondNumber); 
                 </pre>
             </code>
 
             <h3>Go from Integer to String</h3>
             <code>
                 <pre>
-                    let number1 = 130; <br>
-                    let number2 = 430; <br>
-                    let stringNumber = String(number1) + String(number2); <br>
+
+                    let number1 = 130; 
+                    let number2 = 430; 
+                    let stringNumber = String(number1) + String(number2); 
                 </pre>
             </code>
 
             <h3>Go from String to Float</h3>
             <code>
                 <pre>
-                    let float1 = "1.30"; <br>
-                    let float2 = "0.12"; <br>
-                    let result = parseFloat(float1) + parseFloat(float2): <br>
+
+                    let float1 = "1.30"; 
+                    let float2 = "0.12"; 
+                    let result = parseFloat(float1) + parseFloat(float2): 
                 </pre>
             </code>
 
             <h3>Replacing chars in a string</h3>
             <code>
                 <pre>
-                    var fact = "You are learning javascript!"; <br>
-                    var newFact = fact.replace("j", "J"); <br>
+
+                    var fact = "You are learning javascript!"; 
+                    var newFact = fact.replace("j", "J"); 
                 </pre>
             </code>
             <p>Remember that strings are immutable, therefor we need to assign the result to another variable.</p> <br>
@@ -164,6 +176,7 @@
             <h3>Declare objects</h3>
             <code>
                 <pre>
+
                     let myObj = {"message": "Hello, earthling! I bring peace."};
                 </pre>
             </code>
@@ -171,6 +184,7 @@
             <h3>Add more fields to an object</h3>
             <code>
                 <pre>
+
                     myObj.answer = "How lucky for us!";
                 </pre>
             </code>
@@ -178,6 +192,7 @@
             <h3>Remove field from object</h3>
             <code>
                 <pre>
+
                     delete myObj.answer;
                 </pre>
             </code>
@@ -185,9 +200,10 @@
             <h3>Access fields from an object</h3>
             <code>
                 <pre>
-                    var myObj = {"name": "Rasmus", "age": "33"}; <br>
-                    console.log("My name is " + myObj.name); <br>
-                    console.log("I am " + myObj.age + " years old"); <br>
+
+                    var myObj = {"name": "Rasmus", "age": "33"}; 
+                    console.log("My name is " + myObj.name); 
+                    console.log("I am " + myObj.age + " years old"); 
                 </pre>
             </code>
 
@@ -196,43 +212,46 @@
             <h3>Declaring a function</h3>
             <code>
                 <pre>
-                    function addition(num1, num2) { <br>
-                        return num1 + num2; <br>
-                    } <br>
+
+                    function addition(num1, num2) { 
+                        return num1 + num2; 
+                    } 
                 </pre>
             </code>
 
             <h3>Pass functions as a parameter for a function</h3>
             <code>
                 <pre>
-                    function pokeMe() { <br>
-                        console.log("Meow"); <br>
-                    } <br>
-                    <br>
-                    <br>
-                    function approachSomeone(someoneToPoke) { <br>
-                        console.log("tip tap tip tap"); <br>
-                        someoneToPoke(); <br>
-                    } <br>
-                    <br>
-                    approachSomeone(pokeMe); <br>
+
+                    function pokeMe() { 
+                        console.log("Meow"); 
+                    } 
+                    
+                    
+                    function approachSomeone(someoneToPoke) { 
+                        console.log("tip tap tip tap"); 
+                        someoneToPoke(); 
+                    } 
+                    
+                    approachSomeone(pokeMe); 
                 </pre>
             </code>
 
             <h3>Javascripts supports callback functions</h3>
             <code>
                 <pre>
-                    // Arrow function that calls a key in the me object <br>
-                    const aboutMe = (me) => { <br>
-                        console.log("My hobby is", me.hobby); <br>
-                    } <br>
-                    <br>
-                    // Create javascript objects <br>
-                    let me = { <br>
-                        hobby : "Computer Science" <br>
-                    } <br>
-                    <br>
-                    aboutMe(me); <br>
+
+                    // Arrow function that calls a key in the me object 
+                    const aboutMe = (me) => { 
+                        console.log("My hobby is", me.hobby); 
+                    } 
+                    
+                    // Create javascript objects 
+                    let me = { 
+                        hobby : "Computer Science" 
+                    } 
+                    
+                    aboutMe(me); 
                 </pre>
             </code>
 

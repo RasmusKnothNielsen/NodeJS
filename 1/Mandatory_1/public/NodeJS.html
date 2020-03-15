@@ -68,6 +68,7 @@
         <p>Use this command, to initialie new npm project. Useful when you want to upload a library to npm</p>
         <code>
             <pre>
+
                 $ npm init
             </pre>
         </code>
@@ -76,12 +77,14 @@
         <p>Used as an alternative to:</p>
         <code>
             <pre>
+
                 $ node app
             </pre>
         </code>
         <p>Use this instead</p>
         <code>
             <pre>
+
                 $ nodemon app
             </pre>
         </code>
@@ -99,6 +102,7 @@
 
         <code>
             <pre>
+
                 $ npx budo index.js --live --open
             </pre>
         </code>
@@ -108,6 +112,7 @@
         <h2>How to run scripts</h2>
         <code>
             <pre>
+
                 $ npm run [scriptname]
             </pre>
         </code>
@@ -115,6 +120,7 @@
         <p>Add it to package.json in the top as </p>
         <code>
             <pre>
+
                 {
                     "scripts": {
                         "start": "node app.js",
@@ -132,6 +138,7 @@
             Another example is</p>
         <code>
             <pre>
+
                 "scripts": {
                     "start": "cross-env PORT=80 node app.js",
                     "start-dev": "cross-env PORT=8686 nodemon app.js",
@@ -148,6 +155,7 @@
         <p>If you set the port number in our express server to the following</p>
         <code>
             <pre>
+
                 process.env.PORT || 3000
             </pre>
         </code>
@@ -155,6 +163,7 @@
         <p>It is possible to run the application by writing</p>
         <code>
             <pre>
+
                 $ node app.js
             </pre>
         </code>
@@ -163,6 +172,7 @@
         <p>If you want it to listen to another port you can do the following</p>
         <code>
             <pre>
+
                 $ PORT=8080 node app.js
             </pre>
         </code>
@@ -173,6 +183,7 @@
         <p>Install cross-env</p>
         <code>
             <pre>
+
                 $ npm install --save-dev cross-env
             </pre>
         </code>
@@ -181,6 +192,7 @@
 
         <code>
             <pre>
+                
                 $ cross-env PORT=80 node app.js
             </pre>
         </code>

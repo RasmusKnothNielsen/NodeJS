@@ -53,6 +53,7 @@
         <p>Add package.json</p>
         <code>
             <pre>
+
                 $ touch package.json
             </pre>
         </code>
@@ -60,6 +61,7 @@
         <p><br>Install express</p>
         <code>
             <pre>
+
                 $ npm install express
             </pre>
         </code>
@@ -67,6 +69,7 @@
         <p><br>Add app.js</p>
         <code>
             <pre>
+
                 $ touch app.js
             </pre>
         </code>
@@ -75,6 +78,7 @@
 
         <code>
             <pre>
+
                 const app = require("express")();
                 const server = app.listen(portnumber, (error) => { 
                     if (error) { 
@@ -114,6 +118,7 @@
 
         <code>
             <pre>
+
                 app.get("/path", (req, res) => { 
                     return res.send({"response": "text"}); 
                 })
@@ -124,6 +129,7 @@
 
         <code>
             <pre>
+
                 app.get("/", (req, res) => { 
                     return res.sendFile(__dirName + "rest/of/the/path.html"); 
                 })
@@ -134,6 +140,7 @@
 
         <code>
             <pre>
+
                 app.get("/users/:id", (req, res) => {
                     let capturingId = req.body.id;
                     return res.send({"entered id": capturingId});
@@ -159,6 +166,7 @@
 
         <code>
             <pre>
+
                 app.post("/devices", (req, res) => {
                     // Check if the input is correct
                     let newDevice = req.body
@@ -184,6 +192,7 @@
             you have to import express validator</p>
         <code>
             <pre>
+
                 $ npm install express-validator
             </pre>
         </code>
@@ -191,6 +200,7 @@
         <p>After this, you have to require the following two packages</p>
         <code>
             <pre>
+
                 const { body,validationResult } = require('express-validator/check');
                 const { sanitizeBody } = require('express-validator/filter');
             </pre>
@@ -202,6 +212,7 @@
 
         <code>
             <pre>
+
                 app.put("/devices/:id", (req, res) => {
                     if (devices.filter(device => device.id === Number(req.params.id)) < 1) {
                         return res.status(400).send()
@@ -221,6 +232,7 @@
 
         <code>
             <pre>
+
                 app.delete("/devices/:id", (req, res) => {
                     if (devices.filter(device => device.id === Number(req.params.id)) < 1) {
                         return res.status(400).send()
@@ -236,6 +248,7 @@
         <p>Add the following lines, if you want to be able to parse post request bodies.</p>
         <code>
             <pre>
+
                 app.use(express.json());
                 app.use(express.urlencoded({extended: true}));
             </pre>
@@ -244,6 +257,7 @@
         <h2>Enable NodeJS to serve files from specific folders</h2>
         <code>
             <pre>
+                
                 app.use(express.static('public')); 
                 app.use(express.static('videos')); 
             </pre>
