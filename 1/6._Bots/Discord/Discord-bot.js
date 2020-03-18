@@ -7,6 +7,13 @@ const { prefix, token } = require('./config.json');
 // create a new Discord client
 const client = new Discord.Client();
 
+const fridaySongs = [];
+fridaySongs.push('https://youtu.be/qijBzcteR9Y');
+fridaySongs.push('https://youtu.be/XQCz96er7ns');
+fridaySongs.push('https://youtu.be/MEIRNj0EmH0');
+fridaySongs.push('https://youtu.be/K7l5ZeVVoCA');
+fridaySongs.push('https://youtu.be/h61QG4s0I3U');
+
 // when the client is ready, run this code
 // this event will only trigger one time after logging in
 client.on('ready', () => {
@@ -15,11 +22,14 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 	// Testing
-	if (msg.content === `${prefix}ping`) {
-		msg.reply('pong');
+	if (msg.content === `${prefix}friday`) {
+		const randomSong = fridaySongs[Math.floor(Math.random() * fridaySongs.length)];
+		msg.reply(randomSong);
 	}
-	else if (msg.content.startsWith(`${prefix}beep`)) {
-		msg.channel.send('Boop!');
+	else if (msg.content.startsWith(`${prefix}addfriday `)) {
+		const url = msg.content.slice(11);
+		fridaySongs.push(url);
+		msg.channel.send('Song successfully added');
 	}
 	else if (msg.content === `${prefix}server`) {
 		msg.channel.send(`Server name: ${msg.guild.name}\nTotal members: ${msg.guild.memberCount}\nGenesis: ${msg.guild.createdAt}\nLocation: ${msg.guild.region}`);
@@ -28,14 +38,15 @@ client.on('message', msg => {
 		msg.channel.send(`Your username: ${msg.author.username}\nYour ID: ${msg.author.id}`);
 	}
 	else if (msg.content.startsWith(`${prefix}g `)) {
-		const lookup = msg.content.slice(3);
+		let lookup = msg.content.slice(3);
+		lookup = lookup.replace(' ', '+');
 		const newlookup = 'https://www.google.com/search?source=hp&ei=mFopW5aMIomSsAfRw77IDg&q=' + lookup;
 		msg.channel.send('<a:googling:426453223310622740> Loading...').then(message => {
 			google(lookup, (err) => {
 			  if (err) {console.error(err);}
 			  else {
 					message.edit(newlookup);
-			  }
+		 		}
 			});
 		  });
 	}
