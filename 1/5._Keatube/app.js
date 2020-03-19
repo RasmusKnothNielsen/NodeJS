@@ -12,11 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.static('videos'));
 
-// SSR Server Side Rendering
-// Used to read html files into memory, so we can concatonate them in the correct way
-// and then send the files as strings, so the browser can interpret them.
-// This way, we can combine our header, footer and "main view"
-
 // If undefined, start on 8686, else start on the provided portnumber
 const port = process.env.PORT ? process.env.PORT : 8686;
 
@@ -24,6 +19,7 @@ const port = process.env.PORT ? process.env.PORT : 8686;
 // Using readFileSync, blocks the app from going on, before the file is read
 const navbarPage = fs.readFileSync(__dirname + '/public/navbar/navbar.html', 'utf-8');
 const footerPage = fs.readFileSync(__dirname + '/public/footer/footer.html', 'utf-8');
+
 const frontpagePage = fs.readFileSync(__dirname + '/public/frontpage/frontpage.html', 'utf-8');
 const playerPage = fs.readFileSync(__dirname + '/public/player/player.html', 'utf-8');
 
@@ -36,6 +32,12 @@ app.get('/', (req, res) => {
 app.get('/player/:videoid', (req, res) => {
 	return res.send(navbarPage + playerPage + footerPage);
 });
+
+// How to import routes and use them from another file
+// Import routes
+const videosRoute = require('./routes/videos');
+// Setup routes
+app.use(videosRoute);
 
 
 // Start the server on the provided port

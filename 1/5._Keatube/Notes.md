@@ -26,3 +26,6 @@ This way, we can combine our header, footer and "main view"
 Do the following in a .js file
 > console.log($)
 If it displays a function, JQuery is imported correctly
+
+## Good to know
+- Every file in node js is its own module

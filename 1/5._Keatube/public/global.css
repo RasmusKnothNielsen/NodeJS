@@ -1,0 +1,12 @@
+#footer-wrapper {
+    font-size: 0.4em;
+    text-align: left;
+}
+
+#frontpage-wrapper, #video-headline {
+    text-align: center;
+}
+
+#logo {
+    width: 20%;
+}
