@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 
+// Enable express to parse json
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -12,16 +13,17 @@ app.use(express.static('videos'));
 const port = process.env.PORT ? process.env.PORT : 8686;
 
 
-// Sending the page to the user on video.
-app.get('/video/:videoid', (req, res) => {
-	console.log(req.params.videoid);
-	return res.sendFile(__dirname + '/public/video.html');
+// Get Request for the player page
+app.get('/player/:videoid', (req, res) => {
+	// console.log(req.params.videoid);
+	return res.sendFile(__dirname + '/public/player/player.html');
 });
 
-app.get('/video2/:videoid', (req, res) => {
-	console.log(req.params.videoid);
-	return res.sendFile(__dirname + '/public/video2.html');
+// Get Request for front page
+app.get('/', (req, res) => {
+	return res.sendFile(__dirname + '/public/frontpage/frontpage.html');
 });
+
 
 // Start the server on the provided port
 app.listen(port, error => {
