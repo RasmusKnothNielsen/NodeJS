@@ -9,6 +9,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.static('videos'));
 
+// SSR Server Side Rendering
+// Used to read html files into memory, so we can concatonate them in the correct way
+// and then send the files as strings, so the browser can interpret them.
+// This way, we can combine our header, footer and "main view"
+
 // If undefined, start on 8686, else start on the provided portnumber
 const port = process.env.PORT ? process.env.PORT : 8686;
 
