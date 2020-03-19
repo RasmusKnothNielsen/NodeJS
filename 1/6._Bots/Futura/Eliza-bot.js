@@ -49,6 +49,7 @@ function ElizaBot(noRandomFlag) {
 	  ]]
 	*/
 
+
 		['xnone', 0, [
 		 ['*', [
 		     'I\'m not sure I understand you fully.',
@@ -780,8 +781,8 @@ ElizaBot.prototype._init = function() {
 	}
 
 	if ((this.elizaPosts) && (this.elizaPosts.length)) {
-let a = new Array();
-		forletar i = 0; i < this.elizaPosts.length; i += 2) {
+		const a = new Array();
+		for (let i = 0; i < this.elizaPosts.length; i += 2) {
 			a.push(this.elizaPosts[i]);
 			ElizaBot.prototype.posts[this.elizaPosts[i]] = this.elizaPosts[i + 1];
 		}
