@@ -63,24 +63,19 @@ router.get('/videos/:videoId', (req, res) => {
 // Create video
 router.post('/videos', upload.single('video'), (req, res) => {
 	// req.file is the `avatar` file
-	console.log(req.file);
 	// req.body will hold the text fields, if there were any
 	const title = req.body.title;
 	const description = req.body.description;
 	const fileName = req.file.filename;
-	const category = req.file.category;
+	const category = req.body.category;
 	const tags = req.body.tags.split(' ');
-	// const uploadDate = new Date(Date().getFullYear(), Date().getMonth(), Date().getDate());
-	// console.log(uploadDate);
-	videos.push({ title: title, description: description, fileName: fileName, category: category, tags: tags });
+	// Get current date
+	const d = new Date();
+	const currentDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes());
+	// Push the new video to the videos array
+	videos.push({ title: title, description: description, fileName: fileName, category: category, tags: tags, uploadDate: currentDate });
 	console.log(videos);
 	return res.redirect('/');
-});
-
-router.post('/test', (req, res) => {
-	console.log(req.body);
-	return res.send({});
-
 });
 
 // Export the route

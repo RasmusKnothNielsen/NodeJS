@@ -25,6 +25,8 @@ $.get(`/videos/${videoId}`)
 		$('#player-wrapper').append(player);
 
 		$('.description').text(response.response.description);
+
+		$('.added').text('Added: ' + response.response.uploadDate.substring(0, 10));
 	})
 	.catch((error) => {
 		console.log(error);

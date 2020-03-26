@@ -7,8 +7,14 @@
           <input type="text" id="title" name="title"><br><br>
           <label for="description">Description:</label>
           <input type="textarea" id="description" name="description"><br><br>
-          <label for="title">Category:</label>
-          <input type="dropdown" id="category" name="category"><br><br>
+          <label for="category">Category:</label>
+          <select id="category" name="category">
+            <option value="default">Choose</option>
+            <option value="Nature">Nature</option>
+            <option value="Music">Music</option>
+            <option value="Education">Education</option>
+            <option value="Comedy">Comedy</option>
+          </select> <br><br>
           <label for="tags">Tags:</label>
           <input type="text" id="tags" name="tags" placeholder="Separate with space"><br><br>
           <input type="submit" value="Submit">
