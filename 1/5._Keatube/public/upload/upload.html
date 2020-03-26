@@ -1,0 +1,24 @@
+        <h1>Upload Page!</h1>
+        <script src="/upload/upload.js"></script>
+
+        <form action="/videos" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+          <input type="file" name="video" accept="video/*"/>
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title"><br><br>
+          <label for="description">Description:</label>
+          <input type="textarea" id="description" name="description"><br><br>
+          <label for="title">Category:</label>
+          <input type="dropdown" id="category" name="category"><br><br>
+          <label for="tags">Tags:</label>
+          <input type="text" id="tags" name="tags" placeholder="Separate with space"><br><br>
+          <input type="submit" value="Submit">
+        </form>
+
+
+        <form action="/test" method="POST">
+          <input type="text" id="name" name="name" placeholder="name"><br><br>
+          <button>submit</button>
+        </form>
+
+
+        

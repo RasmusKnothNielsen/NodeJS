@@ -5,20 +5,33 @@
 // This will redirect to localhost:8686/player/test
 
 // Retrieve the full URL and split it into an array
-const pathArray = window.location.pathname.split('/');
-const videoID = pathArray[2];
+const fullUrl = window.location.href;
+const videoId = fullUrl.substr(fullUrl.lastIndexOf('/') + 1);
 
 // Console log the pathvariable
-console.log(`${videoID}`);
+console.log(`${videoId}`);
 
-// Create the video tag
-const player = `<video width="320" height="240" controls>
-                    <source src="/${videoID}" type="video/mp4">
+// Call the backend and retrieve the json about this specific video
+$.get(`/videos/${videoId}`)
+	.done((response) => {
+		console.log(response.response);
+		$('.title').text(response.response.title);
+
+		const player = `<video id="player" width="320" height="240" controls>
+                    <source src="/${videoId}">
                     Your browser does not support the video tag.
-                </video> `;
+                </video>`;
 
-// Append the video tag to the player wrapper
-$('#player-wrapper').append(player);
+		$('#player-wrapper').append(player);
+
+		$('.description').text(response.response.description);
+	})
+	.catch((error) => {
+		console.log(error);
+		$('.title').text('Could not find video');
+	});
+
+
 // Change the source of the video to the provided path variable
 // document.getElementById('video').src = '/' + videoID;
 // Reload the video to force the changes to update.

@@ -22,6 +22,7 @@ const footerPage = fs.readFileSync(__dirname + '/public/footer/footer.html', 'ut
 
 const frontpagePage = fs.readFileSync(__dirname + '/public/frontpage/frontpage.html', 'utf-8');
 const playerPage = fs.readFileSync(__dirname + '/public/player/player.html', 'utf-8');
+const uploadPage = fs.readFileSync(__dirname + '/public/upload/upload.html', 'utf-8');
 
 // Get Request for front page
 app.get('/', (req, res) => {
@@ -32,6 +33,12 @@ app.get('/', (req, res) => {
 app.get('/player/:videoid', (req, res) => {
 	return res.send(navbarPage + playerPage + footerPage);
 });
+
+// Upload videos
+app.get('/upload', (req, res) => {
+	return res.send(navbarPage + uploadPage + footerPage);
+});
+
 
 // How to import routes and use them from another file
 // Import routes
