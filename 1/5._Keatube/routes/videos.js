@@ -64,43 +64,80 @@ router.get('/videos/:videoId', (req, res) => {
 router.post('/videos', upload.single('video'), (req, res) => {
 	// req.file is the `avatar` file
 	// req.body will hold the text fields, if there were any
-	const title = req.body.title;
+	const title = req.body.title ? req.body.title : '';
 	const description = req.body.description;
 	const fileName = req.file.filename;
 	const category = req.body.category;
-	const tags = req.body.tags.split(' ');
+	// Split the tags with whitespace or commas
+	const tags = req.body.tags.split(/\s*[,\s]\s*/);
 	// Get current date
 	const d = new Date();
 	const currentDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes());
 
 	// Server side validation
-	if (!validateUserUpload(title, description, category)) {
-		return res.send({ response: 'Error, You have to provide a Category!' });
+	const errors = validateUserUpload(title, description, category);
+	if (errors.length > 0) {
+		return res.send({ response: errors });
+	}
+	else {
+		// Push the new video to the videos array
+		videos.push({
+			title: title,
+			description: description,
+			fileName: fileName,
+			thumbnail: '', // TODO
+			category: category,
+			tags: tags,
+			uploadDate: currentDate,
+		});
+		console.log(videos);
+		return res.redirect(`/player/${fileName}`);
 	}
 
-
-	// Push the new video to the videos array
-	videos.push({ title: title, description: description, fileName: fileName, category: category, tags: tags, uploadDate: currentDate });
-	console.log(videos);
-	return res.redirect('/');
 });
 
 function validateUserUpload(title, description, category) {
-	console.log(title, description, category);
-	if (title.length < 8 || title.length > 64) {
+
+	let errors = [];
+
+	// Validate title length
+	if (title == undefined || title.length < 8 || title.length > 64) {
+		errors.push('Title is not between 8 and 64 characters long.');
 		return false;
 	}
 
+	// Validate description
 	if (description.length > 2048) {
+		errors.push('Title has to be less than 2048.');
 		return false;
 	}
 
-	if (category == undefined) {
+	// Validate that category is chosen
+	if (!acceptedCategories.includes(category)) {
+		errors.push('Providede category is not supported.')
 		return false;
 	}
 
-	return true;
+	return errors;
 }
+
+// Array of categories that we accept
+const acceptedCategories = [
+	'autosvehicles',
+	'comedy',
+	'education',
+	'entertainment',
+	'filmanimation',
+	'gaming',
+	'howtostyle',
+	'music',
+	'nature',
+	'newspolitics',
+	'nonprofitactivism',
+	'peopleblogs',
+	'sciencetechnology',
+	'sports',
+];
 
 // Export the route
 module.exports = router;

@@ -1,5 +1,9 @@
 .description {
-    font-size: 0.8em;
+    font-size: 1em;
+}
+
+.added, .tags {
+    font-size: 0.6em;
 }
 
 #player {

@@ -27,6 +27,10 @@ $.get(`/videos/${videoId}`)
 		$('.description').text(response.response.description);
 
 		$('.added').text('Added: ' + response.response.uploadDate.substring(0, 10));
+		const arrayOfTags = response.response.tags;
+		arrayOfTags.forEach(tag => {
+			$('.tags').append(tag + ' ');
+		});
 	})
 	.catch((error) => {
 		console.log(error);
