@@ -1,12 +1,42 @@
-        <h1>Upload Page!</h1>
         <script src="/upload/upload.js"></script>
 
-        <form action="/videos" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
-          <input type="file" name="video" accept="video/*"/>
+        <h1>Upload</h1>
+        <form action="/videos" method="POST" enctype="multipart/form-data" name="videoupload" onsubmit="return validateForm()">
+          <input name="title" placeholder="title" />
+          <textarea name="description" placeholder="description" rows="6"></textarea>
+          <label for="category">Category:</label>
+          <select id="category" name="category">
+            <option value="none" selected disabled hidden>Choose here</option>
+            <option value="autosvehicles">Autos & Vehicles</option>
+            <option value="comedy">Comedy</option>
+            <option value="education">Education</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="filmanimation">Film & Animation</option>
+            <option value="gaming">Gaming</option>
+            <option value="howtostyle">How-To & Style</option>
+            <option value="music">Music</option>
+            <option value="nature">Nature</option>
+            <option value="newspolitics">News & Politics</option>
+            <option value="nonprofitactivism">Non-profit & Activism</option>
+            <option value="peopleblogs">People & Blogs</option>
+            <option value="sciencetechnology">Science & Technology</option>
+            <option value="sports">Sports</option>
+          </select> <br><br>
+          <label for="tags">Tags:</label>
+          <input type="text" id="tags" name="tags" placeholder="Separate with space"><br><br>
+          <input type="file" name="video" accept="video/*" onchange="handleFileUpload(this.files)" />
+          <button type="submit">Submit</button>
+        </form>
+        
+        <!--
+        <script src="/upload/upload.js"></script>
+
+        <form action="/videos" method="POST" enctype="multipart/form-data" name="videoupload" onsubmit="return validateForm()">
+          <input type="file" name="video" accept="video/*" onchange="handleFileUpload(this.files)"/>
           <label for="title">Title:</label>
           <input type="text" id="title" name="title"><br><br>
           <label for="description">Description:</label>
-          <input type="textarea" id="description" name="description"><br><br>
+          <textarea type="textarea" id="description" name="description" rows="6"></textarea><br><br>
           <label for="category">Category:</label>
           <select id="category" name="category">
             <option value="default">Choose</option>
@@ -19,12 +49,8 @@
           <input type="text" id="tags" name="tags" placeholder="Separate with space"><br><br>
           <input type="submit" value="Submit">
         </form>
+        -->
 
-
-        <form action="/test" method="POST">
-          <input type="text" id="name" name="name" placeholder="name"><br><br>
-          <button>submit</button>
-        </form>
 
 
         

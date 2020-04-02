@@ -31,7 +31,7 @@ const videos = [{
 	thumbnail: '',
 	category: 'Nature',
 	tags: ['waves', 'ocean', 'coast'],
-	uploadDate: new Date(2020, 3, 26, 08, 43),
+	uploadDate: new Date(2020, 3, 26, 18, 43),
 },
 {
 	title: 'Man enjoys Ocean Waves',
@@ -40,7 +40,7 @@ const videos = [{
 	thumbnail: '',
 	category: 'Nature',
 	tags: ['waves', 'ocean', 'coast', 'man', 'beanie'],
-	uploadDate: new Date(2020, 3, 26, 09, 43),
+	uploadDate: new Date(2020, 3, 26, 19, 43),
 }];
 
 const videosPerPage = 10;
@@ -72,11 +72,35 @@ router.post('/videos', upload.single('video'), (req, res) => {
 	// Get current date
 	const d = new Date();
 	const currentDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes());
+
+	// Server side validation
+	if (!validateUserUpload(title, description, category)) {
+		return res.send({ response: 'Error, You have to provide a Category!' });
+	}
+
+
 	// Push the new video to the videos array
 	videos.push({ title: title, description: description, fileName: fileName, category: category, tags: tags, uploadDate: currentDate });
 	console.log(videos);
 	return res.redirect('/');
 });
+
+function validateUserUpload(title, description, category) {
+	console.log(title, description, category);
+	if (title.length < 8 || title.length > 64) {
+		return false;
+	}
+
+	if (description.length > 2048) {
+		return false;
+	}
+
+	if (category == undefined) {
+		return false;
+	}
+
+	return true;
+}
 
 // Export the route
 module.exports = router;
