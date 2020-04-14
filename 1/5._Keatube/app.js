@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 // Make NodeJS able to serve the files from /public and /videos.
 app.use(express.static('public'));
 app.use(express.static('videos'));
-app.use(express.static('thumbnails'));
+app.use(express.static(__dirname + '/thumbnails'));
 
 // If undefined, start on 8686, else start on the provided portnumber
 const port = process.env.PORT ? process.env.PORT : 8686;

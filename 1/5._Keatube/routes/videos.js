@@ -41,7 +41,7 @@ const videos = [{
 	title: 'Ocean Waves',
 	description: 'Watch the waves and enjoy',
 	fileName: '1fb249005a44d5bbdf9788b7e0f6e0c4d8e758e1.mp4',
-	thumbnail: '1fb249005a44d5bbdf9788b7e0f6e0c4d8e758e1.mp4.jpeg',
+	thumbnail: '1fb249005a44d5bbdf9788b7e0f6e0c4d8e758e1.mp4.png',
 	category: 'Nature',
 	tags: ['waves', 'ocean', 'coast'],
 	uploadDate: new Date(2020, 3, 26, 18, 43),
@@ -67,7 +67,7 @@ const videos = [{
 	title: 'Man enjoys Ocean Waves',
 	description: 'Watch a man enjoying watching the waves',
 	fileName: 'd430ccb3be606a29d259b95cbc850b4ae78b75ce.mp4',
-	thumbnail: 'd430ccb3be606a29d259b95cbc850b4ae78b75ce.mp4.jpeg',
+	thumbnail: 'd430ccb3be606a29d259b95cbc850b4ae78b75ce.mp4.png',
 	category: 'Nature',
 	tags: ['waves', 'ocean', 'coast', 'man', 'beanie'],
 	uploadDate: new Date(2020, 3, 26, 19, 43),
@@ -137,7 +137,7 @@ router.post('/videos', upload.single('video'), (req, res) => {
 		ffmpeg(req.file.path).screenshots({
 			timestamps: [0.0],
 			filename: fileName + '.png',
-			folder: './thumbnails',
+			folder: path.join(__dirname + '/../' + 'public/images/thumbnails'),
 			size: '640x480',
 			autopad: 'black',
 		}).on('end', function() {
@@ -152,7 +152,7 @@ router.post('/videos', upload.single('video'), (req, res) => {
 			title: title,
 			description: description,
 			fileName: fileName,
-			thumbnail: fileName + '.jpeg',
+			thumbnail: fileName + '.png',
 			category: category,
 			tags: generated_tags,
 			uploadDate: currentDate,
@@ -209,7 +209,7 @@ function validateUserUpload(title, description, category) {
 async function generateTags(fileName) {
 	let results = [];
 	// Create tags via Tensorflow mobilenet image recognition
-	const pathToImg = path.join(__dirname + '/../thumbnails/' + fileName + '.png');
+	const pathToImg = path.join(__dirname + '/../' + 'public/images/thumbnails/' + fileName + '.png');
 	const readImage = path => {
 		const imageBuffer = fs.readFileSync(path);
 		const tfimage = tf.node.decodeImage(imageBuffer);
