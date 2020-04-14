@@ -3,7 +3,12 @@ const router = require('express').Router();
 
 const crypto = require('crypto');
 
+const fs = require('fs');
+
+const ffmpeg = require('fluent-ffmpeg');
+
 const multer = require('multer');
+
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, 'videos');
@@ -27,21 +32,25 @@ const upload = multer({ storage: storage });
 const videos = [{
 	title: 'Ocean Waves',
 	description: 'Watch the waves and enjoy',
-	fileName: '5e72d5bc-8ada-4b2e-b477-68b72cd0187b.mp4',
-	thumbnail: '',
+	fileName: '1fb249005a44d5bbdf9788b7e0f6e0c4d8e758e1.mp4',
+	thumbnail: '1fb249005a44d5bbdf9788b7e0f6e0c4d8e758e1.mp4.jpeg',
 	category: 'Nature',
 	tags: ['waves', 'ocean', 'coast'],
 	uploadDate: new Date(2020, 3, 26, 18, 43),
+	views: 0,
 },
 {
 	title: 'Man enjoys Ocean Waves',
 	description: 'Watch a man enjoying watching the waves',
-	fileName: '29156f99-6ef1-4bc8-8542-c17b3c05b6a5.mp4',
-	thumbnail: '',
+	fileName: 'd430ccb3be606a29d259b95cbc850b4ae78b75ce.mp4',
+	thumbnail: 'd430ccb3be606a29d259b95cbc850b4ae78b75ce.mp4.jpeg',
 	category: 'Nature',
 	tags: ['waves', 'ocean', 'coast', 'man', 'beanie'],
 	uploadDate: new Date(2020, 3, 26, 19, 43),
+	views: 0,
 }];
+
+fs.writeFileSync('./data.json', JSON.stringify(videos), 'utf-8');
 
 const videosPerPage = 10;
 
@@ -57,6 +66,9 @@ router.get('/videos', (req, res) => {
 
 // Return the specific video
 router.get('/videos/:videoId', (req, res) => {
+	let video = videos.find(video => video.fileName === req.params.videoId);
+	video['views'] += 1;
+
 	return res.send({ response: videos.find(video => video.fileName === req.params.videoId) });
 });
 
@@ -80,15 +92,27 @@ router.post('/videos', upload.single('video'), (req, res) => {
 		return res.send({ response: errors });
 	}
 	else {
+
+		// Create thumbnail
+		ffmpeg(req.file.path).screenshots({
+			timestamps: [0.0],
+			filename: fileName + '.png',
+			folder: './thumbnails',
+			size: '640x480',
+			autopad: 'black',
+		}).on('end', function() {
+			console.log('done');
+		});
 		// Push the new video to the videos array
 		videos.push({
 			title: title,
 			description: description,
 			fileName: fileName,
-			thumbnail: '', // TODO
+			thumbnail: fileName + '.jpeg',
 			category: category,
 			tags: tags,
 			uploadDate: currentDate,
+			views: 0,
 		});
 		console.log(videos);
 		return res.redirect(`/player/${fileName}`);

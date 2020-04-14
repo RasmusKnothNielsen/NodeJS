@@ -17,6 +17,7 @@ $.get(`/videos/${videoId}`)
 		console.log(response.response);
 		$('.title').text(response.response.title);
 
+		// Add the video to the player
 		const player = `<video id="player" width="320" height="240" controls>
                     <source src="/${videoId}">
                     Your browser does not support the video tag.
@@ -27,10 +28,15 @@ $.get(`/videos/${videoId}`)
 		$('.description').text(response.response.description);
 
 		$('.added').text('Added: ' + response.response.uploadDate.substring(0, 10));
+
+		// Add tags to the page
 		const arrayOfTags = response.response.tags;
 		arrayOfTags.forEach(tag => {
 			$('.tags').append(tag + ' ');
 		});
+
+		// Add views to the page
+		$('.views').append(`${response.response.views}`);
 	})
 	.catch((error) => {
 		console.log(error);
