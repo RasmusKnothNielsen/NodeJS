@@ -37,6 +37,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Video schema
+const rawData = fs.readFileSync('./data.json', 'utf-8');
+let videos = JSON.parse(rawData);
+console.log(videos);
+/*
 const videos = [{
 	title: 'Ocean Waves',
 	description: 'Watch the waves and enjoy',
@@ -89,8 +93,7 @@ const videos = [{
 			time: new Date(2020, 2, 29, 20, 47),
 		}],
 }];
-
-fs.writeFileSync('./data.json', JSON.stringify(videos), 'utf-8');
+*/
 
 const videosPerPage = 10;
 
@@ -101,13 +104,16 @@ router.get('/videos', (req, res) => {
 	const end = start + videosPerPage;
 	// Number of videos per page and current page number?
 
-	return res.send({ response: videos.slice(start, end) });
+	// return res.send({ response: videos.slice(start, end) });
+	return res.send({ response: videos });
 });
 
 // Return the specific video
 router.get('/videos/:videoId', (req, res) => {
 	let video = videos.find(video => video.fileName === req.params.videoId);
 	video['views'] += 1;
+	// Save the new view to "database"
+	fs.writeFileSync('./data.json', JSON.stringify(videos), 'utf-8');
 
 	return res.send({ response: videos.find(video => video.fileName === req.params.videoId) });
 });
@@ -149,8 +155,8 @@ router.post('/videos', upload.single('video'), (req, res) => {
 			const generated_tags = generateTags(fileName);
 		});
 
-		// Push the new video to the videos array
-		videos.push({
+		// Push the new video to the front of the videos array
+		videos.unshift({
 			title: title,
 			description: description,
 			fileName: fileName,
@@ -161,6 +167,9 @@ router.post('/videos', upload.single('video'), (req, res) => {
 			views: 0,
 			comments: [],
 		});
+
+		fs.writeFileSync('./data.json', JSON.stringify(videos), 'utf-8');
+
 		console.log(videos);
 		return res.redirect(`/player/${fileName}`);
 	}
@@ -178,6 +187,9 @@ router.post('/comment', (req, res) => {
 			comment: req.body.addcomment,
 			time: new Date(),
 		});
+
+	// Save the new comment
+	fs.writeFileSync('./data.json', JSON.stringify(videos), 'utf-8');
 
 	return res.redirect(`/player/${req.body.hiddenVideoId}`);
 });

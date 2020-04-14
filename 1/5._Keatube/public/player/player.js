@@ -52,16 +52,6 @@ $.get(`/videos/${videoId}`)
 		$('.title').text('Could not find video');
 	});
 
-// Enabling comment field to be executed by pressing enter
-$("#add-comment").keypress(function (e) {
-	if(e.which == 13 && !e.shiftKey) {
-		console.log('enter was pressed');
-		console.log($);
-		$(this).closest("form").submit();
-		e.preventDefault();
-	}
-});
-
 // Change the source of the video to the provided path variable
 // document.getElementById('video').src = '/' + videoID;
 // Reload the video to force the changes to update.
