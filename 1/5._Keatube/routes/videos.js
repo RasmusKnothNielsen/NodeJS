@@ -38,6 +38,22 @@ const videos = [{
 	tags: ['waves', 'ocean', 'coast'],
 	uploadDate: new Date(2020, 3, 26, 18, 43),
 	views: 0,
+	comments: [
+		{
+			id: 1,
+			comment: 'Nice video, mate!',
+			time: new Date(2020, 2, 26, 20, 51),
+		},
+		{
+			id: 2,
+			comment: 'Wish I was there :)',
+			time: new Date(2020, 2, 27, 13, 37),
+		},
+		{
+			id: 3,
+			comment: 'Hahah lets go, Brr!',
+			time: new Date(2020, 2, 29, 20, 47),
+		}],
 },
 {
 	title: 'Man enjoys Ocean Waves',
@@ -48,6 +64,22 @@ const videos = [{
 	tags: ['waves', 'ocean', 'coast', 'man', 'beanie'],
 	uploadDate: new Date(2020, 3, 26, 19, 43),
 	views: 0,
+	comments: [
+		{
+			id: 1,
+			comment: 'Uuuh niiiice',
+			time: new Date(2020, 2, 26, 20, 51),
+		},
+		{
+			id: 2,
+			comment: 'Maaan, he is really enjoying the view!',
+			time: new Date(2020, 2, 27, 13, 37),
+		},
+		{
+			id: 3,
+			comment: 'Nice beanie, man!',
+			time: new Date(2020, 2, 29, 20, 47),
+		}],
 }];
 
 fs.writeFileSync('./data.json', JSON.stringify(videos), 'utf-8');
@@ -118,6 +150,21 @@ router.post('/videos', upload.single('video'), (req, res) => {
 		return res.redirect(`/player/${fileName}`);
 	}
 
+});
+
+// Adding comments to videos
+router.post('/comment', (req, res) => {
+
+	let video = videos.find(video => video.fileName === req.body.hiddenVideoId);
+	const length = video['comments'].length;
+	video.comments.push(
+		{
+			id: length,
+			comment: req.body.addcomment,
+			time: new Date(),
+		});
+
+	return res.redirect(`/player/${req.body.hiddenVideoId}`);
 });
 
 function validateUserUpload(title, description, category) {
