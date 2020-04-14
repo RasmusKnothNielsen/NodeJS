@@ -133,9 +133,11 @@ router.post('/videos', upload.single('video'), (req, res) => {
 	}
 	else {
 		let generated_tags = [];
+		const middleOfFilm = req.file.size / 100 / 60 / 60;
+		console.log(req.file);
 		// Create thumbnail
 		ffmpeg(req.file.path).screenshots({
-			timestamps: [0.0],
+			timestamps: [middleOfFilm],
 			filename: fileName + '.png',
 			folder: path.join(__dirname + '/../' + 'public/images/thumbnails'),
 			size: '640x480',
