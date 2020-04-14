@@ -4,7 +4,7 @@
   "description": "A basic video site",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env PORT=80 node app.js",
+    "start": "cross-env PORT=8686 node app.js",
     "start-dev": "cross-env PORT=8686 nodemon app.js",
     "start-prod": "cross-env PORT=8686 pm2 start app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
