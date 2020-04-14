@@ -5,7 +5,15 @@ const crypto = require('crypto');
 
 const fs = require('fs');
 
+const path = require('path');
+
 const ffmpeg = require('fluent-ffmpeg');
+
+const tf = require('@tensorflow/tfjs-node');
+const mobilenet = require('@tensorflow-models/mobilenet');
+require('@tensorflow/tfjs-node');
+
+const PNG = require('png-js');
 
 const multer = require('multer');
 
@@ -124,7 +132,7 @@ router.post('/videos', upload.single('video'), (req, res) => {
 		return res.send({ response: errors });
 	}
 	else {
-
+		let generated_tags = [];
 		// Create thumbnail
 		ffmpeg(req.file.path).screenshots({
 			timestamps: [0.0],
@@ -134,7 +142,11 @@ router.post('/videos', upload.single('video'), (req, res) => {
 			autopad: 'black',
 		}).on('end', function() {
 			console.log('done');
+
+			// Create tags via Tensorflow mobilenet image recognition
+			const generated_tags = generateTags(fileName);
 		});
+
 		// Push the new video to the videos array
 		videos.push({
 			title: title,
@@ -142,9 +154,10 @@ router.post('/videos', upload.single('video'), (req, res) => {
 			fileName: fileName,
 			thumbnail: fileName + '.jpeg',
 			category: category,
-			tags: tags,
+			tags: generated_tags,
 			uploadDate: currentDate,
 			views: 0,
+			comments: [],
 		});
 		console.log(videos);
 		return res.redirect(`/player/${fileName}`);
@@ -185,12 +198,37 @@ function validateUserUpload(title, description, category) {
 
 	// Validate that category is chosen
 	if (!acceptedCategories.includes(category)) {
-		errors.push('Providede category is not supported.')
+		errors.push('Providede category is not supported.');
 		return false;
 	}
 
 	return errors;
 }
+
+// Helper function for generating tags with tensorflow
+async function generateTags(fileName) {
+	let results = [];
+	// Create tags via Tensorflow mobilenet image recognition
+	const pathToImg = path.join(__dirname + '/../thumbnails/' + fileName + '.png');
+	const readImage = path => {
+		const imageBuffer = fs.readFileSync(path);
+		const tfimage = tf.node.decodeImage(imageBuffer);
+		return tfimage;
+	};
+	const imageClassification = async path => {
+		const image = readImage(path);
+		const mobilenetModel = await mobilenet.load();
+		const predictions = await mobilenetModel.classify(image);
+		console.log('Classification Results:', predictions);
+		// Get the newly added video and add the generated tags to it
+		let video = videos.find(video => video.fileName === fileName);
+		predictions.forEach(prediction => {
+			video['tags'].push(prediction.className);
+		});
+	};
+	imageClassification(pathToImg);
+}
+
 
 // Array of categories that we accept
 const acceptedCategories = [
