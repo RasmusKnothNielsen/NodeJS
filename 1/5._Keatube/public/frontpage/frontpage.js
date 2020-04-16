@@ -1,3 +1,4 @@
+
 $.get('videos', (response) => {
 	response.response.map((video) => {
 		$('#video-gallery').append(

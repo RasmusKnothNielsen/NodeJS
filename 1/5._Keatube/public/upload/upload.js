@@ -1,3 +1,4 @@
+
 let fileValid = false;
 
 function validateForm() {
@@ -8,11 +9,11 @@ function validateForm() {
 
 	if (title.length < 8 || title.length > 64) {
 		if (title.length < 8) {
-			Swal.fire('Title is too short!');
+			sweetAlert('Title is too short!');
 			//alert('Title is too short!');
 		}
 		else if (title.length > 64) {
-			Swal.fire('Title is too long!');
+			sweetAlert('Title is too long!');
 			//alert('Title is too long!');
 		}
 		return false;
@@ -23,11 +24,18 @@ function validateForm() {
 	}
 
 	if (category.value == 'none') {
-		Swal.fire('You have to pick a category!');
+		sweetAlert('You have to pick a category!');
 		//alert('You have to pick a category!');
 		return false;
 	}
 
+	sweetAlert({
+		position: 'top-end',
+		icon: 'success',
+		title: 'Your work has been saved',
+		showConfirmButton: false,
+		timer: 1500,
+	  });
 	return true && fileValid;
 }
 // How to access information from a form
@@ -42,14 +50,14 @@ function handleFileUpload(files) {
 	const mimeTypeArray = file.type.split('/');
 	if (mimeTypeArray[0] !== 'video') {
 		fileValid = false;
-		Swal.fire('We only support videos right now!');
+		sweetAlert('We only support videos right now!');
 		return;
 	}
 	const fileSize = file.size;
 	const twoGBFileLimit = 2147483648;
 	if (fileSize > twoGBFileLimit) {
 		fileValid = false;
-		Swal.fire('Video is too large!');
+		sweetAlert('Video is too large!');
 		return;
 	}
 
