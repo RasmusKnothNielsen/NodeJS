@@ -8,10 +8,12 @@ function validateForm() {
 
 	if (title.length < 8 || title.length > 64) {
 		if (title.length < 8) {
-			alert('Title is too short!');
+			Swal.fire('Title is too short!');
+			//alert('Title is too short!');
 		}
 		else if (title.length > 64) {
-			alert('Title is too long!');
+			Swal.fire('Title is too long!');
+			//alert('Title is too long!');
 		}
 		return false;
 	}
@@ -21,7 +23,8 @@ function validateForm() {
 	}
 
 	if (category.value == 'none') {
-		alert('You have to pick a category!');
+		Swal.fire('You have to pick a category!');
+		//alert('You have to pick a category!');
 		return false;
 	}
 
@@ -39,12 +42,14 @@ function handleFileUpload(files) {
 	const mimeTypeArray = file.type.split('/');
 	if (mimeTypeArray[0] !== 'video') {
 		fileValid = false;
+		Swal.fire('We only support videos right now!');
 		return;
 	}
 	const fileSize = file.size;
 	const twoGBFileLimit = 2147483648;
 	if (fileSize > twoGBFileLimit) {
 		fileValid = false;
+		Swal.fire('Video is too large!');
 		return;
 	}
 
