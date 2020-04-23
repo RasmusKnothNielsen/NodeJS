@@ -7,6 +7,9 @@
     "migrate:latest": "knex migrate:latest",
     "migrate:make": "knex migrate:make",
     "migrate:rollback": "knex migrate:rollback",
+    "seed:make": "knex seed:make",
+    "seed:run": "knex seed:run",
+    "cleanDB": "knex seed:run & knex migrate:rollback & knex migrate:latest & knex seed:run",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -20,3 +20,30 @@ Add knex to it
 Add knex globally
 
 knex init
+
+### Create migrations
+
+> $ npm run migrate:make [name]
+
+eg 
+
+> $ npm run migrate:make initial_schema
+
+### Create seeds
+
+> $ npm run seed:make [name]
+
+eg
+
+> $ npm run seed:make 001._roles
+
+
+### Roll back server and re add seeds
+
+> $ npm run seed:run 000.delete
+
+> $ npm run migrate:rollback
+
+> $ npm run migrate:latest
+
+> $ npm run seed:run 001._roles
