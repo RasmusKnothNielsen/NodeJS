@@ -1,13 +1,16 @@
 {
-  "name": "8._Auth",
+  "name": "8._auth",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "migrate:latest": "knex migrate:latest",
+    "migrate:make": "knex migrate:make",
+    "migrate:rollback": "knex migrate:rollback",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Rasmus Knoth Nielsen",
   "license": "ISC",
   "dependencies": {
     "knex": "^0.21.0",

@@ -9,7 +9,10 @@ module.exports = {
   development: {
     client: 'mysql',
     connection: {
-      filename: './dev.sqlite3'
+      database: credentials.database,
+      user: credentials.user,
+      password: credentials.password,
+
     }
   },
 
