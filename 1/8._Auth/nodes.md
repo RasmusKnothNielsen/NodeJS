@@ -47,3 +47,24 @@ eg
 > $ npm run migrate:latest
 
 > $ npm run seed:run 001._roles
+
+
+### When installing the app on another machine
+
+Download and install
+> $ git clone [address]
+> $ cd [dir]
+> $ npm install
+
+Start MySQL server
+> $ mysql.server start
+> $ mysql -uroot -p
+> CREATE DATABASE [db-name]
+
+Alter the mysqlCredentials.template.js 
+-> mysqlCredentials.js
+Write the db name,  user and password in the file
+
+Create the tables of the databse
+> $ npm run migrate:latest
+> $ npm run seed:run 001._users
