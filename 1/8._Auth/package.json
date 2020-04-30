@@ -1,6 +1,6 @@
 {
   "name": "8._auth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "migrate:rollback": "knex migrate:rollback",
     "seed:make": "knex seed:make",
     "seed:run": "knex seed:run",
-    "cleanDB": "knex seed:run & knex migrate:rollback & knex migrate:latest & knex seed:run",
+    "cleanDB": "knex seed:run && knex migrate:rollback && knex migrate:latest && knex seed:run",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
