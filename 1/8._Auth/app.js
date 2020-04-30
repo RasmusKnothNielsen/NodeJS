@@ -31,10 +31,25 @@ const knex = Knex(knexFile.development);    // This is how you can have differen
 // Connect the knex to our objection model, so that objection knows to use knex
 Model.knex(knex);
 
-/* Add routes */
+
+/* Temp */
+/* Two ways of doing it */
 app.get('/', (req, res) => {
-    res.send({response: "OKOK"});
+    knex('roles').select().then(users => {
+        return res.send({response: users});
+    }).catch(error => {
+        return res.status(400).send({response: error})
+    });
 });
+
+app.get('/2', async (req, res) => {
+    try {
+        const result = await knex('roles').select();
+        return res.send({response: result});
+    } catch (error) {
+        return res.status(400).send({response: error})
+    }
+})
 
 
 app.use(authRoute);
