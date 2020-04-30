@@ -1,6 +1,6 @@
 {
   "name": "8._auth",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "knex": "^0.21.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "express": "4.17.1"
   }
 }
