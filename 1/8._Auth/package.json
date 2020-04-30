@@ -1,6 +1,6 @@
 {
   "name": "8._auth",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,8 +16,9 @@
   "author": "Rasmus Knoth Nielsen",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "knex": "^0.21.0",
     "mysql": "^2.18.1",
-    "express": "4.17.1"
+    "objection": "^2.1.3"
   }
 }

@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 
 // Setting port number
-const port = process.env.PORT ? process.env.PORT : 8686;
+const PORT = process.env.PORT ? process.env.PORT : 8686;
 
 // Enable express to parse json
 app.use(express.json());
@@ -15,21 +15,36 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.static('videos'));
 
-// Routes
+const authRoute = require('./routes/auth.js');
 
-app.get('/login', (req, res) => {
-    console.log('GET - trying to log in');
+
+/* Setup Objection + Knex */
+const Model = require('objection').Model;
+const Knex = require('knex');   // Since Knex is with capital K, it is a library, eg. containing functions
+
+// knexFile contains our meta information about our connection
+const knexFile = require('./knexfile.js')
+
+// knex contains the connection
+const knex = Knex(knexFile.development);    // This is how you can have different environments, eg. Development, Production
+
+// Connect the knex to our objection model, so that objection knows to use knex
+Model.knex(knex);
+
+/* Add routes */
+app.get('/', (req, res) => {
+    res.send({response: "OKOK"});
 });
 
-app.post('/login', (req, res) => {
-    console.log('POST - trying to log in');
-});
 
-// Start the server on the provided port
-app.listen(port, error => {
+app.use(authRoute);
+
+
+/* Start server */
+app.listen(PORT, error => {
     if (error) {
         console.log(error.log);
     }
-    console.log('The server has started on port', port)
+    console.log('The server has started on port', PORT)
 })
 
