@@ -13,6 +13,8 @@
     <h2>What's on your mind?</h2>
     <input id="thoughts" placeholder="write" />
     <button id="btn-submit" onclick="onThoughtsSubmitted()">Post</button>
+
+    <div id="messages"></div>
     <script>
 
         // Connection for the socket
@@ -23,6 +25,10 @@
             $('#thoughts').val("");
             socket.emit("I'm thinking about this", { thoughts });
         }
+
+        socket.on("Someone said", data => {
+            $('#messages').prepend(`<div>${data.thoughts}</div>`)
+        })
     </script>
     
 </body>
