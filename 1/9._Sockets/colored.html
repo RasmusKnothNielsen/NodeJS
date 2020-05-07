@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Colored Page</title>
+</head>
+<body>
+
+    <input id="colorChoice" type="color"/>
+    <button onclick="onSubmitted()">Choose</button>
+
+    <div id="messages"></div>
+
+    <script>
+
+        // Connection for the socket
+        const socket = io.connect("localhost:3000");
+
+        function onSubmitted() {
+            const color = document.getElementById("colorChoice").value; 
+            console.log(color)
+            socket.emit("colorPicked", { color });
+        }
+
+        socket.on("Color changed to", data => {
+            console.log(data.color)
+            $('body').css('background-color', data.color)
+
+        })
+    </script>
+    
+</body>
+</html>

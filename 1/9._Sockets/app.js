@@ -6,7 +6,7 @@ const escape = require('escape-html');
 
 // Used for security
 const helmet = require('helmet');
-app.use(helmet);
+app.use(helmet());
 
 const io = require('socket.io')(server);
 
@@ -19,9 +19,6 @@ io.on('connection', socket => {
 
         // Prevent XSS (Cross Site Scripting)
         io.emit("Someone said", { thoughts: escape(thoughts) });
-
-        
-
 
         // Sends back to the specific socket
         //socket.emit("Someone said", { thoughts });
@@ -36,10 +33,19 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
         console.log("Socket left", socket.id)
     });
+
+    socket.on('colorPicked', ( data ) => {
+        console.log(data.color)
+        io.emit("Color changed to", { color: escape( data.color ) });
+    })
 });
 
 app.get("/", (req, res) => {
     return res.sendFile(__dirname + "/index.html");
+})
+
+app.get("/colored", (req, res) => {
+    return res.sendFile(__dirname + "/colored.html");
 })
 
 server.listen(3000);
