@@ -4,19 +4,30 @@ const express = require('express');
 
 const app = express();
 
+// Rate limiting users
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 8 // limit each IP to 100 requests per windowMs
+  });
+  app.use("/login", limiter);
+  app.use("/signup", limiter);
+
+
+const session = require('express-session');
+app.use(session({
+    secret: require('./config/mysqlCredentials').sessionSecret,
+    resave: false,
+    saveUninitialized: true,
+    //cookie: { secure: true }
+  }));
+
 // Setting port number
 const PORT = process.env.PORT ? process.env.PORT : 8686;
 
 // Enable express to parse json
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Make NodeJS able to serve the files from /public and /videos.
-app.use(express.static('public'));
-app.use(express.static('videos'));
-
-const authRoute = require('./routes/auth.js');
-
 
 /* Setup Objection + Knex */
 const Model = require('objection').Model;
@@ -31,6 +42,18 @@ const knex = Knex(knexFile.development);    // This is how you can have differen
 // Connect the knex to our objection model, so that objection knows to use knex
 Model.knex(knex);
 
+
+app.use((req, res, next) => {
+    console.log(new Date());
+    next();     // Calls the next method in line, order matters alot!
+})
+
+// Add routes
+const authRoute = require('./routes/auth.js');
+const usersRoute = require('./routes/users.js')
+
+app.use(authRoute);
+app.use(usersRoute);
 
 /* Temp */
 /* Two ways of doing it */

@@ -68,3 +68,14 @@ Write the db name,  user and password in the file
 Create the tables of the databse
 > $ npm run migrate:latest
 > $ npm run seed:run 001._users
+
+
+## Libraries
+
+Express rate limiter
+https://www.npmjs.com/package/express-rate-limit
+
+
+Express Session
+https://www.npmjs.com/package/express-session
+
