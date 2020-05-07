@@ -32,7 +32,7 @@ router.post('/login', async (req, res) => {
 router.post('/signup', async (req, res) => {
     //const users = await User.query().select();
 
-    let { username, password, passwordRepeat } = await req.body;
+    const { username, password, passwordRepeat } = await req.body;
 
     const isPasswordTheSame = password === passwordRepeat;
  
@@ -54,11 +54,10 @@ router.post('/signup', async (req, res) => {
 
                     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-                    password = hashedPassword
 
                     const insertedUser = await User.query().insert({
                         username,
-                        password,
+                        password: hashedPassword,
                         roleID: role[0].id,  
                     });
                     return res.status(200).send({ response : `User created with username ${insertedUser.username}!`})
@@ -79,7 +78,7 @@ router.post('/signup', async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    
+
     return res.send({response: ["Logging out"]})
 });
 

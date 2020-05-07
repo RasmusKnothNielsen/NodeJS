@@ -8,12 +8,12 @@ router.get('/users/roles', async (req, res) => {
 })
 
 router.get('/setsessionvalue', (req, res) => {
-    req.session.myValue = req.sessionID     
+    req.session.sessionID = req.sessionID     
     return res.send({ response: "SessionID is set to " + req.sessionID});
 });
 
 router.get('/getsessionvalue', (req, res) => {
-    return res.send({ response: req.session.myValue});
+    return res.send({ response: req.sessionID});
 });
 
 module.exports = router;

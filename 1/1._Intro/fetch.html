@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetching recipe</title>
+</head>
+<body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <h1>Bored?</h1>
+
+    <p clas="activity">Why dont you </p>
+    <p id="activity"></p>
+    <!--
+    <script>
+        fetch('http://www.boredapi.com/api/activity/')
+        .then(response => response.json())
+        .then(data => $(".activity").append(data.activity));
+        
+    </script>
+    
+    OR
+    -->
+    <script>
+        fetch('http://www.boredapi.com/api/activity/')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('activity').textContent = data.activity
+        });
+        
+    </script>
+    
+</body>
+</html>
