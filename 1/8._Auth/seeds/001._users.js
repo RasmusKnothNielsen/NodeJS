@@ -6,9 +6,9 @@ exports.seed = function(knex) {
 
     // Inserts seed entries
     return knex('users').insert([
-      {username: 'admin', password: 'Hunter2', role_id: roles[0].id},
-      {username: 'user', password: 'Hunter2', role_id: roles[2].id},
-      {username: 'anon', password: 'Hunter2', role_id: roles[1].id}
+      {username: 'admin', password: '$2b$10$QPLR8foTJYkWVK3x2ws0tuNc3OCrUjkBmW9/R.wDVDrPzixJzx7ca', role_id: roles[0].id, email: "admin@email.com"},
+      {username: 'user', password: '$2b$10$zeqXl5kf.yZfkY2N3gvaUusMysTCYt1CkdSO1yg0xqZyQfuL66YJm', role_id: roles[2].id, email: "user@email.com"},
+      {username: 'anon', password: '$2b$10$FuNaKHcZD.3OdXFZacUMbeedX8T7rKkavTeMPHpwUSkqFcOcec2tO', role_id: roles[1].id,}
     ]);
   });
 };

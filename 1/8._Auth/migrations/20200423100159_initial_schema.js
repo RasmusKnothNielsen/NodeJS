@@ -10,6 +10,7 @@ exports.up = function(knex) {
             table.string('username').unique().notNullable();
             table.string('password').notNullable();
             table.integer('age');
+            table.string('email').unique();
 
             // Make the role_id compatible with roles.id
             // and make it a foreign key that references roles.id

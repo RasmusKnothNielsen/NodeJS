@@ -1,6 +1,7 @@
 // Server for taking http requests from the user to display the correct page 
 // or take information to add to the server/database
 const express = require('express');
+const fs = require('fs');
 
 const app = express();
 
@@ -55,8 +56,45 @@ const usersRoute = require('./routes/users.js')
 app.use(authRoute);
 app.use(usersRoute);
 
+// Load the navbar and footer into memory
+// Using readFileSync, blocks the app from going on, before the file is read
+const navbarPage = fs.readFileSync(__dirname + '/public/navbar/navbar.html', 'utf-8');
+const footerPage = fs.readFileSync(__dirname + '/public/footer/footer.html', 'utf-8');
+
+
+app.get("/", (req, res) => {
+    // Server Side Rendering:
+    console.log(__dirname)
+    let frontpage = fs.readFileSync(__dirname + '/public/frontpage.html', 'utf-8');
+    let result = navbarPage + frontpage + footerPage
+    return res.send(result);
+})
+
+app.get('/login', (req, res) => {
+    // Server Side Rendering:
+    let login = fs.readFileSync(__dirname + '/public/auth/login.html', 'utf-8');
+    let result = navbarPage + login + footerPage
+    return res.send(result);
+})
+
+app.get('/signup', (req, res) => {
+    // Server Side Rendering:
+    let signup = fs.readFileSync(__dirname + '/public/auth/signup.html', 'utf-8');
+    let result = navbarPage + signup + footerPage
+    return res.send(result);
+})
+
+app.get('/resetpassword', (req, res) => {
+    // Server Side Rendering:
+    let resetPassword = fs.readFileSync(__dirname + '/public/auth/resetpassword.html', 'utf-8');
+    let result = navbarPage + resetPassword + footerPage
+    return res.send(result);
+})
+
+
 /* Temp */
 /* Two ways of doing it */
+/*
 app.get('/', (req, res) => {
     knex('roles').select().then(users => {
         return res.send({response: users});
@@ -73,9 +111,10 @@ app.get('/2', async (req, res) => {
         return res.status(400).send({response: error})
     }
 })
+*/
 
 
-app.use(authRoute);
+//app.use(authRoute);
 
 
 /* Start server */
