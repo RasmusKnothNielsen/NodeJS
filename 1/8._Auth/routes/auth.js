@@ -3,6 +3,7 @@ const User = require('../models/User.js');
 const Role = require('../models/Role.js');
 const fs = require('fs');
 const nodemailer = require('nodemailer')
+const mailCredentials = require('../config/mailCredentials');
 
 // Hashing Passwords
 const bcrypt = require('bcrypt');
@@ -119,26 +120,26 @@ router.post('/resetpassword', async (req, res) => {
                         const transporter = nodemailer.createTransport({
                             service: 'gmail',
                             auth: {
-                              user: 'chiefspammer@yourgreatdomain.com',
-                              pass: 'SuperSecretPassword' // naturally, replace both with your real credentials or an application-specific password
+                              user: mailCredentials.user,
+                              pass: mailCredentials.password
                             }
                           });
 
                         // send mail with defined transport object
-                        let info = await transporter.sendMail({
-                            from: '"Fred Foo 👻" <foo@example.com>', // sender address
-                            to: email, // list of receivers
-                            subject: "Hello ✔", // Subject line
-                            text: "Hello world?", // plain text body
-                            html: "<b>Hello world?</b>" // html body
-                        });
-
-                        console.log("Message sent: %s", info.messageId);
-                        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-                        // Preview only available when sending through an Ethereal account
-                        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-
+                        const mailOptions = {
+                            from: mailCredentials.user,
+                            to: email,
+                            subject: 'Resetting mail',
+                            text: 'This is where the link for the reset thing is going to be.'
+                          };
+                          
+                          transporter.sendMail(mailOptions, function(error, info){
+                            if (error) {
+                              console.log(error);
+                            } else {
+                              console.log('Email sent: ' + info.response);
+                            }
+                          });
 
                         return res.send({response: `Sent email to ${email}`})
                     } 
