@@ -116,15 +116,13 @@ router.post('/resetpassword', async (req, res) => {
                         let testAccount = await nodemailer.createTestAccount();
 
                         // create reusable transporter object using the default SMTP transport
-                        let transporter = nodemailer.createTransport({
-                            host: "smtp.ethereal.email",
-                            port: 587,
-                            secure: false, // true for 465, false for other ports
+                        const transporter = nodemailer.createTransport({
+                            service: 'gmail',
                             auth: {
-                            user: testAccount.user, // generated ethereal user
-                            pass: testAccount.pass // generated ethereal password
+                              user: 'chiefspammer@yourgreatdomain.com',
+                              pass: 'SuperSecretPassword' // naturally, replace both with your real credentials or an application-specific password
                             }
-                        });
+                          });
 
                         // send mail with defined transport object
                         let info = await transporter.sendMail({
