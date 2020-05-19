@@ -2,6 +2,7 @@
 // or take information to add to the server/database
 const express = require('express');
 const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 
@@ -17,6 +18,13 @@ const limiter = rateLimit({
 
 const session = require('express-session');
 app.use(session({
+    genid: (req) => {   // Generate an ID for our session, that has to be unique
+        // This will only be run, if the client does not have provided a sessionID already
+        // OR if the client sends a sessionID that the server does not recognize. Can happen if the server restarts/crashes.
+        console.log("Inside the session middleware")
+        console.log(req.sessionID);
+        return uuidv4();
+    },
     secret: require('./config/mysqlCredentials').sessionSecret,
     resave: false,
     saveUninitialized: true,
@@ -64,7 +72,10 @@ const footerPage = fs.readFileSync(__dirname + '/public/footer/footer.html', 'ut
 
 app.get("/", (req, res) => {
     // Server Side Rendering:
-    console.log(__dirname)
+    //const uniqueId = uuidv4();
+    //console.log(uniqueId);
+    console.log('Inside the homepage callback function');
+    console.log(req.sessionID);
     let frontpage = fs.readFileSync(__dirname + '/public/frontpage.html', 'utf-8');
     let result = navbarPage + frontpage + footerPage
     return res.send(result);
