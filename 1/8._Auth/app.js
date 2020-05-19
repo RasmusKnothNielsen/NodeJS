@@ -59,10 +59,12 @@ app.use((req, res, next) => {
 
 // Add routes
 const authRoute = require('./routes/auth.js');
-const usersRoute = require('./routes/users.js')
+const usersRoute = require('./routes/users.js');
+const routes = require('./routes/routes.js');
 
 app.use(authRoute);
 app.use(usersRoute);
+app.use(routes);
 
 // Load the navbar and footer into memory
 // Using readFileSync, blocks the app from going on, before the file is read
@@ -100,6 +102,16 @@ app.get('/resetpassword', (req, res) => {
     let resetPassword = fs.readFileSync(__dirname + '/public/auth/resetpassword.html', 'utf-8');
     let result = navbarPage + resetPassword + footerPage
     return res.send(result);
+})
+
+app.get('/secure', (req, res) => {
+    if (req.session.authenticated == true) {
+        const securePage = fs.readFileSync(__dirname + '/public/securepage.html', 'utf-8');
+        return res.send(navbarPage + securePage + footerPage);
+    }
+    else {
+        return res.status(401).redirect('/login');
+    }
 })
 
 

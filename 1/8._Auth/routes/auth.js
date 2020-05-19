@@ -25,7 +25,10 @@ router.post('/login', async (req, res) => {
         const validated = await bcrypt.compare(password, userFound[0].password);
         // If the user provided the correct username and password
         if(validated) {
-            return res.send({response: "Logging in"})
+            // TODO Trying this as authentication
+            req.session.authenticated = true;
+			//res.redirect('/secure');
+            return res.redirect('/secure');
         }
         // If the user provided the wrong password
         else {
@@ -156,7 +159,8 @@ router.post('/resetpassword', async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-
+    console.log(req.session);
+    req.session.authenticated = false;
     return res.send({response: ["Logging out"]})
 });
 
