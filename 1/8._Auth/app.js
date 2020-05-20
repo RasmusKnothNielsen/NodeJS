@@ -3,6 +3,8 @@
 const express = require('express');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
+const User = require('./models/User.js');
+const Role = require('./models/Role.js');
 
 const app = express();
 
@@ -103,16 +105,39 @@ app.get('/resetpassword', (req, res) => {
     return res.send(result);
 })
 
-app.get('/secure', (req, res) => {
-    if (req.session && req.session.authenticated == true) {
-        const securePage = fs.readFileSync(__dirname + '/public/securepage.html', 'utf-8');
-        console.log("This is the username, that is logged in:", req.session.user);
-        return res.send(navbarPage + securePage + footerPage);
+app.get('/secure', async (req, res) => {
+    // If we have a session, a UUID and is authenticated
+    const username = req.session.username;
+    // If username is provided
+    if (username != undefined) {
+        const userFound = await User.query().select().where({'username': username}).limit(1);
+
+        if (userFound.length > 0) {
+            if (req.session.authenticated == true && req.session.uuid == userFound[0].uuid) {
+                // Send the secure page
+                const securePage = fs.readFileSync(__dirname + '/public/securepage.html', 'utf-8');
+                console.log("This is the username, that is logged in:", req.session.username);
+                console.log("This is the UUID of the user, that is logged in:", req.session.uuid);
+                return res.send(navbarPage + securePage + footerPage);
+            }
+            // UUID not found
+            else {
+                console.log("UUID does not match users UUID");
+                return res.status(401).redirect('/login');
+            }
+        }
+        else {
+            console.log("User not found in DB");
+            return res.status(401).redirect('/login');
+        }
     }
+    // If username is undefined
     else {
+        console.log("Username is undefined. Remember to login before accessing /secure");
         return res.status(401).redirect('/login');
     }
 })
+
 
 
 /* Temp */

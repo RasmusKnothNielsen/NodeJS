@@ -28,8 +28,9 @@ router.post('/login', async (req, res) => {
         if(validated) {
             // TODO Trying this as authentication
             req.session.authenticated = true;
+            req.session.username = userFound[0].username;
             // Add the users UUID, to show that we are logged in with the specific user
-            req.session.user = userFound[0].uuid;
+            req.session.uuid = userFound[0].uuid;
             return res.redirect('/secure');
         }
         // If the user provided the wrong password
@@ -166,11 +167,43 @@ router.post('/resetpassword', async (req, res) => {
 
 });
 
+/*
+router.get('/secure', async (req, res) => {
+    // If we have a session, a UUID and is authenticated
+    console.log("Going to /secure")
+    if (req.session && req.session.user != undefined && req.session.authenticated == true) {
+        // Check if UUID is in DB
+        console.log("Checking if UUID is in db")
+        console.log(req.session.user)
+        
+        const result = await User.query().select().where({'uuid': req.session.user}).limit(1);
+        // If UUID found
+        if (result.length > 0) {
+            // Send the secure page
+            const securePage = fs.readFileSync(__dirname + '/public/securepage.html', 'utf-8');
+            console.log("This is the UUID of the user, that is logged in:", req.session.user);
+            return res.send(navbarPage + securePage + footerPage);
+        }
+        // UUID not found
+        else {
+            return res.status(401).redirect('/login');
+        }
+    }
+    else {
+        return res.status(401).redirect('/login');
+    }
+})
+*/
+
 router.get('/logout', (req, res) => {
     console.log(req.session);
     req.session.authenticated = false;
+    req.session.user = null;
+    req.session.uuid = null;
     return res.send({response: ["Logging out"]})
 });
+
+
 
 // Export the route
 module.exports = router;

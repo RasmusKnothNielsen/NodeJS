@@ -1,5 +1,5 @@
 #footer-wrapper {
-    font-size: 0.4em;
+    font-size: 0.2em;
     text-align: left;
 }
 
@@ -19,6 +19,7 @@ footer {
     height: 10px;
 }
 
+html,
 body {
-    background-color: aqua;
+  height: 100%
 }
