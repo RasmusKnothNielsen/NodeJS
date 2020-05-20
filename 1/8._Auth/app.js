@@ -60,11 +60,10 @@ app.use((req, res, next) => {
 // Add routes
 const authRoute = require('./routes/auth.js');
 const usersRoute = require('./routes/users.js');
-const routes = require('./routes/routes.js');
 
 app.use(authRoute);
 app.use(usersRoute);
-app.use(routes);
+
 
 // Load the navbar and footer into memory
 // Using readFileSync, blocks the app from going on, before the file is read
@@ -75,7 +74,7 @@ const footerPage = fs.readFileSync(__dirname + '/public/footer/footer.html', 'ut
 app.get("/", (req, res) => {
     // Server Side Rendering:
     //const uniqueId = uuidv4();
-    //console.log(uniqueId);
+    //console.log("UUID:", uniqueId);
     console.log('Inside the homepage callback function');
     console.log(req.sessionID);
     let frontpage = fs.readFileSync(__dirname + '/public/frontpage.html', 'utf-8');
@@ -105,8 +104,9 @@ app.get('/resetpassword', (req, res) => {
 })
 
 app.get('/secure', (req, res) => {
-    if (req.session.authenticated == true) {
+    if (req.session && req.session.authenticated == true) {
         const securePage = fs.readFileSync(__dirname + '/public/securepage.html', 'utf-8');
+        console.log("This is the username, that is logged in:", req.session.user);
         return res.send(navbarPage + securePage + footerPage);
     }
     else {

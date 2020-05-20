@@ -4,6 +4,7 @@ const Role = require('../models/Role.js');
 const fs = require('fs');
 const nodemailer = require('nodemailer')
 const mailCredentials = require('../config/mailCredentials');
+const { v4: uuidv4 } = require('uuid');
 
 // Hashing Passwords
 const bcrypt = require('bcrypt');
@@ -27,7 +28,8 @@ router.post('/login', async (req, res) => {
         if(validated) {
             // TODO Trying this as authentication
             req.session.authenticated = true;
-			//res.redirect('/secure');
+            // Add the users UUID, to show that we are logged in with the specific user
+            req.session.user = userFound[0].uuid;
             return res.redirect('/secure');
         }
         // If the user provided the wrong password
@@ -67,13 +69,18 @@ router.post('/signup', async (req, res) => {
 
                     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
+                    // Create the UUID for the user, that we are going to use as an identifier in our session
+                    const uniqueId = uuidv4();
+                    
+
                     // If email is provided
                     if (email != undefined) {
                         const insertedUser = await User.query().insert({
                             username,
                             password: hashedPassword,
                             roleID: role[0].id,  
-                            email: email
+                            email: email,
+                            UUID: uniqueId,
                         });
                     }
                     // If email is not provided
@@ -82,6 +89,7 @@ router.post('/signup', async (req, res) => {
                             username,
                             password: hashedPassword,
                             roleID: role[0].id,  
+                            UUID: uniqueId,
                         });
                     }
 
