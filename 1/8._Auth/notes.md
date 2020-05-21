@@ -1,5 +1,6 @@
 # Notes for Mandatory II
 
+
 ## Libraries to use
 
 Knex.js and Objection.js
@@ -20,6 +21,7 @@ Add knex to it
 Add knex globally
 
 knex init
+
 
 ### Create migrations
 
