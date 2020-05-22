@@ -79,33 +79,40 @@ app.get("/", (req, res) => {
     //console.log("UUID:", uniqueId);
     console.log('Inside the homepage callback function');
     console.log(req.sessionID);
-    let frontpage = fs.readFileSync(__dirname + '/public/frontpage.html', 'utf-8');
-    let result = navbarPage + frontpage + footerPage
-    return res.send(result);
+    return res.send(renderPage('/public/frontpage.html'));
 })
 
 app.get('/login', (req, res) => {
     // Server Side Rendering:
-    let login = fs.readFileSync(__dirname + '/public/auth/login.html', 'utf-8');
-    let result = navbarPage + login + footerPage
-    return res.send(result);
+    return res.send(renderPage('/public/auth/login.html'));
 })
 
 app.get('/signup', (req, res) => {
     // Server Side Rendering:
-    let signup = fs.readFileSync(__dirname + '/public/auth/signup.html', 'utf-8');
-    let result = navbarPage + signup + footerPage
-    return res.send(result);
+    return res.send(renderPage('/public/auth/signup.html'));
 })
 
 app.get('/resetpassword', (req, res) => {
     // Server Side Rendering:
-    let resetPassword = fs.readFileSync(__dirname + '/public/auth/resetpassword.html', 'utf-8');
-    let result = navbarPage + resetPassword + footerPage
-    return res.send(result);
+    return res.send(renderPage('/public/auth/resetpassword.html'));
 })
 
 app.get('/secure', async (req, res) => {
+    if (await authenticateUser(req) == true) {
+        // Send the secure page
+        console.log("Authenticated")
+        console.log("This is the username, that is logged in:", req.session.username);
+        console.log("This is the UUID of the user, that is logged in:", req.session.uuid);
+        return res.send(renderPage('/public/securepage.html'));
+    }
+    else {
+        console.log("Not authenticated")
+        return res.status(401).redirect('/login');
+    }
+} )
+
+
+async function authenticateUser(req) {
     // If we have a session, a UUID and is authenticated
     const username = req.session.username;
     // If username is provided
@@ -114,29 +121,32 @@ app.get('/secure', async (req, res) => {
 
         if (userFound.length > 0) {
             if (req.session.authenticated == true && req.session.uuid == userFound[0].uuid) {
-                // Send the secure page
-                const securePage = fs.readFileSync(__dirname + '/public/securepage.html', 'utf-8');
-                console.log("This is the username, that is logged in:", req.session.username);
-                console.log("This is the UUID of the user, that is logged in:", req.session.uuid);
-                return res.send(navbarPage + securePage + footerPage);
+                console.log("authenticatedUser() -> true")
+                return true;
             }
             // UUID not found
             else {
                 console.log("UUID does not match users UUID");
-                return res.status(401).redirect('/login');
+                return false;
             }
         }
         else {
             console.log("User not found in DB");
-            return res.status(401).redirect('/login');
+            return false;
         }
     }
     // If username is undefined
     else {
         console.log("Username is undefined. Remember to login before accessing /secure");
-        return res.status(401).redirect('/login');
+        return false;
     }
-})
+}
+
+function renderPage(path) {
+    let page = fs.readFileSync(__dirname + path, 'utf-8');
+    let result = navbarPage + page + footerPage;
+    return result;
+}
 
 
 

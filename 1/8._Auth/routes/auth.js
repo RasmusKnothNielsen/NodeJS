@@ -26,6 +26,7 @@ router.post('/login', async (req, res) => {
         const validated = await bcrypt.compare(password, userFound[0].password);
         // If the user provided the correct username and password
         if(validated) {
+            console.log("User validated")
             // TODO Trying this as authentication
             req.session.authenticated = true;
             req.session.username = userFound[0].username;
