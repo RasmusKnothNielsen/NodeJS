@@ -100,18 +100,38 @@ app.get('/resetpassword', (req, res) => {
 app.get('/secure', async (req, res) => {
     if (await authenticateUser(req) == true) {
         // Send the secure page
-        console.log("Authenticated")
-        console.log("This is the username, that is logged in:", req.session.username);
-        console.log("This is the UUID of the user, that is logged in:", req.session.uuid);
+        //console.log("Authenticated")
+        //console.log("This is the username, that is logged in:", req.session.username);
+        //console.log("This is the UUID of the user, that is logged in:", req.session.uuid);
         return res.send(renderPage('/public/securepage.html'));
     }
     else {
         console.log("Not authenticated")
-        return res.status(401).redirect('/login');
+        return res.status(403).redirect('/login');
     }
-} )
+})
 
+app.get('/profile', async (req, res) => {
+    if (await authenticateUser(req) == true) {
+        return res.send(renderPage('/public/profilepage.html'));
+    }
+    else {
+        return res.status(403).redirect('/login');
+    }
+})
 
+app.get('/api/userinfo', async (req, res) => {
+    const username = req.session.username;
+    if (await authenticateUser(req) == true) {
+        const userFound = await User.query().select().where({'username': username}).limit(1);
+        return res.send({response: {username: userFound[0].username, createdAt: userFound[0].createdAt}})
+    }
+    else {
+        return res.status(403).send({response: "User not found!"})
+    }
+})
+
+// Helperfunction to check if a user is logged in, and thus allowed to visit secure pages.
 async function authenticateUser(req) {
     // If we have a session, a UUID and is authenticated
     const username = req.session.username;
@@ -130,6 +150,7 @@ async function authenticateUser(req) {
                 return false;
             }
         }
+        // Provided user not found
         else {
             console.log("User not found in DB");
             return false;
@@ -142,6 +163,7 @@ async function authenticateUser(req) {
     }
 }
 
+// Helperfunction to render the page using SSR (Server Side Rendering)
 function renderPage(path) {
     let page = fs.readFileSync(__dirname + path, 'utf-8');
     let result = navbarPage + page + footerPage;

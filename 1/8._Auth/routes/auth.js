@@ -32,7 +32,7 @@ router.post('/login', async (req, res) => {
             req.session.username = userFound[0].username;
             // Add the users UUID, to show that we are logged in with the specific user
             req.session.uuid = userFound[0].uuid;
-            return res.redirect('/secure');
+            return res.redirect('/profile');
         }
         // If the user provided the wrong password
         else {

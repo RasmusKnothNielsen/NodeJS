@@ -1,0 +1,11 @@
+<h1>Profile page</h1>
+
+<p class="userinfo"></p>
+
+<script>
+    $.get('/api/userinfo', {}, function(data){
+        console.log(data)
+        $('.userinfo').append('Username: ' + data.response.username + '<br>')
+        $('.userinfo').append('Created at: ' + data.response.createdAt)
+   });
+</script>
