@@ -94,9 +94,15 @@ app.get('/signup', (req, res) => {
     return res.send(renderPage('/public/auth/signup.html'));
 })
 
+// Page to initiate password reset process
 app.get('/resetpassword', (req, res) => {
     // Server Side Rendering:
-    return res.send(renderPage('/public/auth/resetpassword.html'));
+    return res.send(renderPage('/public/auth/sendresetmail.html'));
+})
+
+// landing page for resetting password after getting the email with the token in it
+app.get('/passwordreset', (req, res) => {
+    return res.send((renderPage('/public/resetpassword.html')));
 })
 
 app.get('/secure', async (req, res) => {

@@ -10,6 +10,12 @@ const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+// Dictionary that can contain username and tokens for password reset
+// Used in the post /resetpassword route
+let resetPasswordDict = {}
+
+// TODO Used for testing purposes
+resetPasswordDict['jens3'] = '6adbbd94-1d8a-4c3c-b16a-04f6fbc9d7ee';
 
 router.post('/login', async (req, res) => {
     // 1. retrieve the login details and validate
@@ -123,7 +129,6 @@ router.post('/resetpassword', async (req, res) => {
                     
                     // If the mail provided is the one associated with the user
                     if (email != undefined && email == userFound[0].email) {
-                        // TODO: Send an email to the provided email
 
                         // Generate test SMTP service account from ethereal.email
                         // Only needed if you don't have a real mail account for testing
@@ -138,12 +143,16 @@ router.post('/resetpassword', async (req, res) => {
                             }
                           });
 
+                        // Define a token for the user to log in with:
+                        const userToken = uuidv4();
+                        resetPasswordDict[userFound[0].username] = userToken
+
                         // send mail with defined transport object
                         const mailOptions = {
                             from: mailCredentials.user,
                             to: email,
                             subject: 'Resetting mail',
-                            text: 'This is where the link for the reset thing is going to be.'
+                            text: `Use the following token to reset your password: ${userToken}\nGo to /passwordReset for further information.`
                           };
                           
                           transporter.sendMail(mailOptions, function(error, info){
@@ -167,6 +176,35 @@ router.post('/resetpassword', async (req, res) => {
                 }
 
 });
+
+// route for resetting password
+router.post('/passwordreset', async (req, res) => {
+    const username = req.body.username;
+    const token = req.body.token;
+    const password = req.body.password;
+    const passwordRepeat = req.body.passwordRepeat;
+    console.log(req.body.username);
+    console.log(req.body.token);
+
+    // Check if the token is the one saved in the dictionary
+    if (resetPasswordDict[username] = token) {
+        // If it is, check if password and passwordRepeat match
+        if (password != undefined && password == passwordRepeat) {
+            // if they do, hash password and save it to the database
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
+            console.log("New hashed password = ", hashedPassword)
+            const userUpdated = await User.query().where('username', '=', username).update({ password: hashedPassword});
+            return res.status(200).redirect('/login');
+        }
+        // Passwords does not match
+        else {
+            return res.status(401).send({response: "Passwords must match eachother"});
+        }
+    }
+    else {
+        return res.status(401).send({response: "Invalid token entered"});
+    }
+})
 
 /*
 router.get('/secure', async (req, res) => {
