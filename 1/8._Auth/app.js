@@ -66,6 +66,8 @@ const usersRoute = require('./routes/users.js');
 app.use(authRoute);
 app.use(usersRoute);
 
+app.use(express.static(__dirname + '/public'));
+
 
 // Load the navbar and footer into memory
 // Using readFileSync, blocks the app from going on, before the file is read

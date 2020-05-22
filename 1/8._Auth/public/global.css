@@ -1,14 +1,9 @@
-#footer-wrapper {
-    font-size: 0.2em;
-    text-align: left;
+.header-text {
+    color: black;
 }
 
 #frontpage-wrapper, #video-headline, .wrapper-links {
     text-align: center;
-}
-
-#logo {
-    width: 10%;
 }
 
 #main-content {
@@ -16,10 +11,19 @@
 }
 
 footer {
-    height: 10px;
+    height: 0.8em;
+}
+
+#header {
+    font-size: large;
+}
+
+#header, #submit-bar {
+    background-color: lightseagreen;
 }
 
 html,
 body {
-  height: 100%
+  height: 100%;
+  background-color:  white;
 }
