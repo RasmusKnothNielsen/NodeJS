@@ -130,10 +130,6 @@ router.post('/resetpassword', async (req, res) => {
                     // If the mail provided is the one associated with the user
                     if (email != undefined && email == userFound[0].email) {
 
-                        // Generate test SMTP service account from ethereal.email
-                        // Only needed if you don't have a real mail account for testing
-                        let testAccount = await nodemailer.createTestAccount();
-
                         // create reusable transporter object using the default SMTP transport
                         const transporter = nodemailer.createTransport({
                             service: 'gmail',
