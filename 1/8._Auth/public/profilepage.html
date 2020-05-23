@@ -4,6 +4,10 @@
     <p class="userinfo"></p>
 </div>
 
+<form method="get" action="/logout">
+    <button type="submit">Logout</button>
+</form>
+
 <script>
     $.get('/api/userinfo', {}, function(data){
         console.log(data)

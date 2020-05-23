@@ -213,7 +213,7 @@ router.get('/logout', (req, res) => {
     req.session.authenticated = false;
     req.session.user = null;
     req.session.uuid = null;
-    return res.send({response: ["Logging out"]})
+    return res.status(200).redirect('/');
 });
 
 
