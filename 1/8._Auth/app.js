@@ -53,7 +53,6 @@ const knex = Knex(knexFile.development);    // This is how you can have differen
 // Connect the knex to our objection model, so that objection knows to use knex
 Model.knex(knex);
 
-
 app.use((req, res, next) => {
     console.log(new Date());
     next();     // Calls the next method in line, order matters alot!
@@ -76,27 +75,19 @@ const footerPage = fs.readFileSync(__dirname + '/public/footer/footer.html', 'ut
 
 
 app.get("/", (req, res) => {
-    // Server Side Rendering:
-    //const uniqueId = uuidv4();
-    //console.log("UUID:", uniqueId);
-    console.log('Inside the homepage callback function');
-    console.log(req.sessionID);
     return res.send(renderPage('/public/frontpage.html'));
 })
 
 app.get('/login', (req, res) => {
-    // Server Side Rendering:
     return res.send(renderPage('/public/auth/login.html'));
 })
 
 app.get('/signup', (req, res) => {
-    // Server Side Rendering:
     return res.send(renderPage('/public/auth/signup.html'));
 })
 
 // Page to initiate password reset process
 app.get('/resetpassword', (req, res) => {
-    // Server Side Rendering:
     return res.send(renderPage('/public/auth/sendresetmail.html'));
 })
 
@@ -107,14 +98,9 @@ app.get('/passwordreset', (req, res) => {
 
 app.get('/secure', async (req, res) => {
     if (await authenticateUser(req) == true) {
-        // Send the secure page
-        //console.log("Authenticated")
-        //console.log("This is the username, that is logged in:", req.session.username);
-        //console.log("This is the UUID of the user, that is logged in:", req.session.uuid);
         return res.send(renderPage('/public/securepage.html'));
     }
     else {
-        console.log("Not authenticated")
         return res.status(403).redirect('/login');
     }
 })
@@ -128,6 +114,7 @@ app.get('/profile', async (req, res) => {
     }
 })
 
+// Api call to supply user information to the /profile page
 app.get('/api/userinfo', async (req, res) => {
     const username = req.session.username;
     if (await authenticateUser(req) == true) {
@@ -177,33 +164,6 @@ function renderPage(path) {
     let result = navbarPage + page + footerPage;
     return result;
 }
-
-
-
-/* Temp */
-/* Two ways of doing it */
-/*
-app.get('/', (req, res) => {
-    knex('roles').select().then(users => {
-        return res.send({response: users});
-    }).catch(error => {
-        return res.status(400).send({response: error})
-    });
-});
-
-app.get('/2', async (req, res) => {
-    try {
-        const result = await knex('roles').select();
-        return res.send({response: result});
-    } catch (error) {
-        return res.status(400).send({response: error})
-    }
-})
-*/
-
-
-//app.use(authRoute);
-
 
 /* Start server */
 app.listen(PORT, error => {

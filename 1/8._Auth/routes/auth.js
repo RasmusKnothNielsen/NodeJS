@@ -14,8 +14,14 @@ const saltRounds = 10;
 // Used in the post /resetpassword route
 let resetPasswordDict = {}
 
-// TODO Used for testing purposes
-resetPasswordDict['jens3'] = '6adbbd94-1d8a-4c3c-b16a-04f6fbc9d7ee';
+// create reusable transporter object using the default SMTP transport
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: mailCredentials.user,
+      pass: mailCredentials.password
+    }
+  });
 
 router.post('/login', async (req, res) => {
     // 1. retrieve the login details and validate
@@ -53,12 +59,12 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-    //const users = await User.query().select();
 
     const { username, password, passwordRepeat, email } = await req.body;
 
     const isPasswordTheSame = password === passwordRepeat;
- 
+    
+    // If the user provided a username, a password and the two passwords are identical.
     if (username && password && isPasswordTheSame) {
         if (password.length < 8) {
             return res.status(400).send({response: "Password does not fulfull the requirements"});
@@ -90,6 +96,22 @@ router.post('/signup', async (req, res) => {
                             email: email,
                             UUID: uniqueId,
                         });
+
+                        // Send email to to notify that user has been created.t
+                        const mailOptions = {
+                            from: mailCredentials.user,
+                            to: email,
+                            subject: 'User created on Mandatory II website',
+                            text: `A user has just been created at the Mandatory II website using this email. If you did not create this user, please notify us!`
+                          };
+                          
+                          transporter.sendMail(mailOptions, function(error, info){
+                            if (error) {
+                              console.log(error);
+                            } else {
+                              console.log('Email sent: ' + info.response);
+                            }
+                          });
                     }
                     // If email is not provided
                     else {
@@ -101,8 +123,7 @@ router.post('/signup', async (req, res) => {
                         });
                     }
 
-                    return res.status(200).send({ response : `User created with username ${username}!`})
-                    // TODO: Redirect to login and use the sweetalert to make a pop up that says that the user is created
+                    return res.status(200).redirect('/login');
                 }
 
             } catch (error) {
@@ -110,7 +131,7 @@ router.post('/signup', async (req, res) => {
             }
         }
     } else if (password && passwordRepeat && !isPasswordTheSame) { 
-        return res.status(400).send({response : "Password do not match"});
+        return res.status(400).send({response : "Password does not match"});
     } else {
         return res.status(404).send({response : "Missing fields: username, password, passwordRepeat" });
     }
@@ -118,6 +139,7 @@ router.post('/signup', async (req, res) => {
     return res.send({response: [username, password, passwordRepeat]})
 });
 
+// Route for initiating password reset and send email
 router.post('/resetpassword', async (req, res) => {
     const { username, email } = req.body;
 
@@ -130,14 +152,22 @@ router.post('/resetpassword', async (req, res) => {
                     // If the mail provided is the one associated with the user
                     if (email != undefined && email == userFound[0].email) {
 
+                        /* The following code is uncommented if you don't want to use your own email addres
+                            for sending out mails /*
+                        /*
+                        let testAccount = await nodemailer.createTestAccount();
+
                         // create reusable transporter object using the default SMTP transport
-                        const transporter = nodemailer.createTransport({
-                            service: 'gmail',
+                        let transporter = nodemailer.createTransport({
+                            host: "smtp.ethereal.email",
+                            port: 587,
+                            secure: false, // true for 465, false for other ports
                             auth: {
-                              user: mailCredentials.user,
-                              pass: mailCredentials.password
-                            }
-                          });
+                            user: testAccount.user, // generated ethereal user
+                            pass: testAccount.pass, // generated ethereal password
+                            },
+                        });
+                        */
 
                         // Define a token for the user to log in with:
                         const userToken = uuidv4();
@@ -209,7 +239,6 @@ router.post('/passwordreset', async (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-    console.log(req.session);
     req.session.authenticated = false;
     req.session.user = null;
     req.session.uuid = null;
