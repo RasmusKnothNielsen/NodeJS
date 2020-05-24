@@ -1,0 +1,29 @@
+.header-text {
+    color: black;
+}
+
+#frontpage-wrapper, #video-headline, .wrapper-links {
+    text-align: center;
+}
+
+#main-content {
+    min-height: calc(100vh - 70px);
+}
+
+footer {
+    height: 0.8em;
+}
+
+#header {
+    font-size: large;
+}
+
+#header, #submit-bar {
+    background-color: lightseagreen;
+}
+
+html,
+body {
+  height: 100%;
+  background-color:  white;
+}
