@@ -1,11 +1,30 @@
 {
-  "name": "exam_project",
+  "name": "video_auth_site",
   "version": "1.0.0",
-  "description": "Project developed for NodeJS Exam",
+  "description": "website that incorporates video streaming, comments and user login",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "Video",
+    "Streaming",
+    "Comments",
+    "User",
+    "Login",
+    "Authentication",
+    "Image",
+    "Recognition"
+  ],
   "author": "Rasmus Knoth Nielsen",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@tensorflow-models/mobilenet": "^2.0.4",
+    "@tensorflow/tfjs-node": "^2.0.0",
+    "express": "^4.17.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "multer": "^1.4.2",
+    "png-js": "^1.0.0",
+    "sweetalert2": "^9.14.0"
+  }
 }
