@@ -24,6 +24,7 @@ const frontpagePage = fs.readFileSync(__dirname + '/public/frontpage/frontpage.h
 const playerPage = fs.readFileSync(__dirname + '/public/player/player.html', 'utf-8');
 const uploadPage = fs.readFileSync(__dirname + '/public/upload/upload.html', 'utf-8');
 
+
 // Get Request for front page
 app.get('/', (req, res) => {
 	return res.send(navbarPage + frontpagePage + footerPage);
@@ -56,7 +57,6 @@ app.get('/resetpassword', (req, res) => {
 app.get('/passwordreset', (req, res) => {
     return res.send((renderPage('/public/resetpassword.html')));
 })
-
 
 // How to import routes and use them from another file
 // Import routes
