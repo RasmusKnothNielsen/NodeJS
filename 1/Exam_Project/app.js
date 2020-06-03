@@ -39,15 +39,41 @@ app.get('/upload', (req, res) => {
 	return res.send(navbarPage + uploadPage + footerPage);
 });
 
+app.get('/login', (req, res) => {
+    return res.send(renderPage('/public/auth/login.html'));
+})
+
+app.get('/signup', (req, res) => {
+    return res.send(renderPage('/public/auth/signup.html'));
+})
+
+// Page to initiate password reset process
+app.get('/resetpassword', (req, res) => {
+    return res.send(renderPage('/public/auth/sendresetmail.html'));
+})
+
+// landing page for resetting password after getting the email with the token in it
+app.get('/passwordreset', (req, res) => {
+    return res.send((renderPage('/public/resetpassword.html')));
+})
+
 
 // How to import routes and use them from another file
 // Import routes
 const videosRoute = require('./routes/videos');
+const authRoute = require('./routes/auth');
 // Setup routes
 app.use(videosRoute);
+app.use(authRoute);
 
+// Helperfunction to render the page using SSR (Server Side Rendering)
+function renderPage(path) {
+    let page = fs.readFileSync(__dirname + path, 'utf-8');
+    let result = navbarPage + page + footerPage;
+    return result;
+}
 
-// Start the server on the provided port
+/* Start server */
 app.listen(port, error => {
 	if (error) {
 		console.log(error.log);

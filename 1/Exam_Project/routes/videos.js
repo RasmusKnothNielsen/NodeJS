@@ -7,12 +7,11 @@ const fs = require('fs');
 
 const path = require('path');
 
+// Used for creating tags from thumbnails
 const ffmpeg = require('fluent-ffmpeg');
-
 const tf = require('@tensorflow/tfjs-node');
 const mobilenet = require('@tensorflow-models/mobilenet');
 require('@tensorflow/tfjs-node');
-
 const PNG = require('png-js');
 
 const multer = require('multer');
@@ -40,60 +39,7 @@ const upload = multer({ storage: storage });
 const rawData = fs.readFileSync('./data.json', 'utf-8');
 let videos = JSON.parse(rawData);
 console.log(videos);
-/*
-const videos = [{
-	title: 'Ocean Waves',
-	description: 'Watch the waves and enjoy',
-	fileName: '1fb249005a44d5bbdf9788b7e0f6e0c4d8e758e1.mp4',
-	thumbnail: '1fb249005a44d5bbdf9788b7e0f6e0c4d8e758e1.mp4.png',
-	category: 'Nature',
-	tags: ['waves', 'ocean', 'coast'],
-	uploadDate: new Date(2020, 3, 26, 18, 43),
-	views: 0,
-	comments: [
-		{
-			id: 1,
-			comment: 'Nice video, mate!',
-			time: new Date(2020, 2, 26, 20, 51),
-		},
-		{
-			id: 2,
-			comment: 'Wish I was there :)',
-			time: new Date(2020, 2, 27, 13, 37),
-		},
-		{
-			id: 3,
-			comment: 'Hahah lets go, Brr!',
-			time: new Date(2020, 2, 29, 20, 47),
-		}],
-},
-{
-	title: 'Man enjoys Ocean Waves',
-	description: 'Watch a man enjoying watching the waves',
-	fileName: 'd430ccb3be606a29d259b95cbc850b4ae78b75ce.mp4',
-	thumbnail: 'd430ccb3be606a29d259b95cbc850b4ae78b75ce.mp4.png',
-	category: 'Nature',
-	tags: ['waves', 'ocean', 'coast', 'man', 'beanie'],
-	uploadDate: new Date(2020, 3, 26, 19, 43),
-	views: 0,
-	comments: [
-		{
-			id: 1,
-			comment: 'Uuuh niiiice',
-			time: new Date(2020, 2, 26, 20, 51),
-		},
-		{
-			id: 2,
-			comment: 'Maaan, he is really enjoying the view!',
-			time: new Date(2020, 2, 27, 13, 37),
-		},
-		{
-			id: 3,
-			comment: 'Nice beanie, man!',
-			time: new Date(2020, 2, 29, 20, 47),
-		}],
-}];
-*/
+
 
 const videosPerPage = 10;
 
